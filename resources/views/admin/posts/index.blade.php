@@ -60,7 +60,7 @@
                         <td> {{ $row->post_order }}</td>
 
                         <td>
-                        @if($row->id == 4)
+                        @if($row->id == 4 || $row->id == 19)
                         <a href="{{ url('admin/associated/' . Request::segment(2) . '/' . $row->id) }}"><i class="fa fa-plus fa fa-2x"></i></a>
                         @endif
                         </td>

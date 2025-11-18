@@ -54,7 +54,7 @@ class PostTypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'post_type'=> 'required',
+            'post_type'=> 'required|unique:cl_post_type',
             'uri'=>'required|unique:cl_post_type'
         ]);
       $medium_width = env('MEDIUM_WIDTH');
@@ -163,7 +163,7 @@ class PostTypeController extends Controller
     public function update(Request $request, PostTypeModel $postTypeModel, $posttype, $id)
     {
         $request->validate([
-            'post_type'=> 'required',
+            'post_type'=> 'required|unique:cl_post_type,post_type,' . $id,
             'uri'=>'required'
         ]);
 

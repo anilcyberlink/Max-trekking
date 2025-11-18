@@ -172,7 +172,7 @@ enctype="multipart/form-data">
           </div>
         </div>
 
-         {{-- <div class="sid_bvijay mb10">
+        <div class="sid_bvijay mb10">
           <h4>Page Banner </h4>
           <div class="hd_show_con">
             <div id="xedit-demo">
@@ -180,7 +180,7 @@ enctype="multipart/form-data">
            </div>
             <small>(width: 2000px height: 1245px)</small>
          </div>
-       </div> --}}
+       </div>
 
        <div class="sid_bvijay mb10">
           <h4> Thumbnail </h4>

@@ -1,144 +1,107 @@
-<footer class="uk-light" id="footer">
-	<div class="uk-footer">
-		<div class="uk-block ">
-			<div class="uk-container   ">
-				<div class="  uk-child-width-expand@s" uk-grid uk-scrollspy="cls: uk-animation-fade; target:.uk-footer-box;  delay: 500;">
-					<div class="uk-footer-box">
-						<!--<h4>BackPackers </h4>-->
-						<ul class="uk-list title-list">
-							@if($about_us)
-								@foreach($about_us as $item)
-						    	<li><a href="{{ route('page.pagedetail', $item->uri) }}">{{$item->post_title}}</a></li>
-								@endforeach
-							@endif
-							<div class="uk-margin-top">
-								<h4>Follow Us</h4>
-								<a href="@if($setting && $setting->facebook_link){{$setting->facebook_link}}@else # @endif" target="_blank" class="uk-icon-button uk-facebook" uk-icon="facebook"></a>
-								<!--<a href="@if($setting && $setting->twitter_link){{$setting->twitter_link}}@else # @endif" target="_blank" class="uk-icon-button uk-twitter " uk-icon="twitter"></a>-->
-								<a href="@if($setting && $setting->instagram_link){{$setting->instagram_link}}@else # @endif" target="_blank" class="uk-icon-button uk-instagram " uk-icon="instagram"></a>
-								<!--<a href="@if($setting && $setting->youtube_link){{$setting->youtube_link}}@else # @endif" target="_blank" class="uk-icon-button uk-youtube " uk-icon="youtube"></a>-->
-								<a href="@if($setting && $setting->tripadvisor_link){{$setting->tripadvisor_link}}@else # @endif" target="_blank" class="uk-icon-button uk-advisor " uk-icon="tripadvisor"></a>
-							</div>
-						</ul>
-					</div>
-					@if($expeditions->count()>0)
-						<div class="uk-footer-box">
-							<h4>Expeditions</h4>
-							@if($expeditions->count()>0)
-								<ul class="uk-list title-list">
-									@foreach($expeditions as $row)
-										@if(trip_byDestinations($row->id)->count()>0)
-											<li><a href="{{ route('page.destinationlist', $row->uri) }}">{{$row->title}}</a></li>
-										@endif
-									@endforeach
-								</ul>
-							@endif
-						</div>
-					@endif
-					@if($regions->count()>0)
-						<div class="uk-footer-box">
-							<h4>Trekking</h4>
-							@if($regions->count()>0)
-								<ul class="uk-list title-list">
-									@foreach($regions as $row)
-										@if (tripbyregions($row->id)->count() > 0)
-											<li><a href="{{ route('page.regionlist', $row->uri) }}">{{$row->title}}</a></li>
-										@endif
-									@endforeach
-								</ul>
-							@endif
-						</div>
-					@endif
-					@if($pagetypes->count()>0 || $contact_us)
-						<div class="uk-footer-box">
-							<h4>Quick Link</h4>
-							<ul class="uk-list title-list">
-								@if($pagetypes->count()>0)
-									@foreach($pagetypes as $row)
-										<li><a href="{{url('info/'.$row->uri)}}">{{$row->page_type}}</a></li>
-									@endforeach
-								@endif
-								<li><a href="{{ route('page.posttype_detail', $contact_us->uri) }}">{{$contact_us->post_type}}</a></li>
-							</ul>
-						</div>
-					@endif
-				</div>
-			</div>
-		</div>
-	</div>
-	@if($setting && $setting->copyright_text)
-		<div class="uk-tiny-footer">
-			<div class="uk-container  uk-text-center    ">
-				<a href="#" uk-totop uk-scroll class="uk-scroll-top" uk-scroll uk-scrollspy="cls: uk-animation-slide-bottom;  delay: 500;"></a>
-				<div class="uk-text-center" uk-scrollspy="cls: uk-animation-fade;    delay: 500;">
-					<div class="uk-text-white">{!!$setting->copyright_text!!}</div>
-				</div>
-			</div>
-		</div>
-	@endif
-</footer>
+<section class="uk-black-shape-bottom uk-section uk-padding-remove-bottom bg-dark" style="position:relative;">
+    <div class="uk-container uk-container-large">
+        <div class="uk-grid-collapse" uk-grid>
+            <div class="uk-width-1-2@s uk-text-left@m uk-text-center">
+                <h3 class="text-white uk-text-uppercase uk-margin-small-top fw-600">Our Partners</h3>
+            </div>
+            <div class="uk-width-1-2@s">
+                <div class="uk-footer-icon uk-text-right@m uk-text-center uk-margin-small-top  uk-margin-bottom">
+                    <a href="#" target="_blank" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
+                    <a href="#" target="_blank" class="uk-icon-button  uk-margin-small-right" uk-icon="facebook"></a>
+                    <a href="#" target="_blank" class="uk-icon-button  uk-margin-small-right" uk-icon="x"></a>
+                    <a href="#" target="_blank" class="uk-icon-button" uk-icon="youtube"></a>
+                </div>
+            </div>
+        </div>
+        <div uk-slider="sets: true; autoplay: true; finite: true;">
+            <div class="uk-position-relative uk-visible-toggle uk-margin-small-bottom" tabindex="-1">
+                <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-child-width-1-5@l  uk-grid-small" uk-grid>
+                    <!--  -->
+                    <li>
+                        <div class="partners-logo-list bg-white uk-border-rounded uk-img-effect">
+                            <a href="#"><img src="https://demo3.ukesh.com/uploads/medium/professional-ucH72jaJtAQhpuJ47taOEwblMfssnCpst59ztsAX.png" class="uk-effect-1" alt=""></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="partners-logo-list bg-white uk-border-rounded uk-img-effect">
+                            <a href="#"><img src="https://demo3.ukesh.com/uploads/medium/peaks-rhPuTNwCPapBpNzvJaL2juTIGyXcVCbugMPPHpl2.png" class="uk-effect-1" alt=""></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="partners-logo-list bg-white uk-border-rounded uk-img-effect">
+                            <a href="#"><img src="https://demo3.ukesh.com/uploads/medium/guida-pzzSiowyAIol6je3bBROHV1sdIAe3VvcC3hd8k5a.png" class="uk-effect-1" alt=""></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="partners-logo-list bg-white uk-border-rounded uk-img-effect">
+                            <a href="#"><img src="https://demo3.ukesh.com/uploads/medium/mountain-ntRnsl7dII8P2fJUC3oUmmm0NE99F2ybzQCKvz01.png" class="uk-effect-1" alt=""></a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="partners-logo-list bg-white uk-border-rounded uk-img-effect">
+                            <a href="#"><img src="https://demo3.ukesh.com/uploads/medium/professional-ucH72jaJtAQhpuJ47taOEwblMfssnCpst59ztsAX.png" class="uk-effect-1" alt=""></a>
+                        </div>
+                    </li>
+                    <!--  -->
+                </ul>
+                <a class="uk-position-center-left uk-position-small uk-hidden" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small uk-hidden  " href="#" uk-slidenav-next uk-slider-item="next"></a>
+            </div>
+            <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+        </div>
+        <div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-margin-top" uk-grid>
+            <div>
+                <h4 class="text-white uk-text-uppercase fw-600 uk-margin-small-bottom">Company</h4>
+                <ul class="uk-footer-list uk-margin-remove-top">
+                    <li><a href="about.php">About</a></li>
+                    <li><a href="whyus.php">Why Us</a></li>
+                    <li><a href="document.php">Legal Document</a></li>
+                    <li><a href="team.php">Our Team</a></li>
+                    <li><a href="faq.php">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white uk-text-uppercase fw-600 uk-margin-small-bottom">Destination </h4>
+                <ul class="uk-footer-list uk-margin-remove-top">
+                    <li><a href="list.php">Annapurna Region</a></li>
+                    <li><a href="list.php">Everest Region</a></li>
+                    <li><a href="list.php">Manasulu Region</a></li>
+                    <li><a href="list.php">Langtang Region</a></li>
+                    <li><a href="list.php">Makalu Region</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white uk-text-uppercase fw-600 uk-margin-small-bottom">Tour Package </h4>
+                <ul class="uk-footer-list uk-margin-remove-top">
+                    <li><a href="detail.php">Annapurna Tour Package</a></li>
+                    <li><a href="detail.php">Manasulu Tour Package</a></li>
+                    <li><a href="detail.php">Langtang Tour Package</a></li>
+                    <li><a href="detail.php">Makalu Tour Package</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white uk-text-uppercase fw-600 uk-margin-small-bottom">Contact Us</h4>
+                <ul class="uk-footer-list uk-margin-remove-top">
+                    <li class="text-white"><span uk-icon="icon: location" class="uk-margin-small-right"></span>Newroad, Kathmandu, Nepal</li>
+                    <li class="text-white"><span uk-icon="icon: mail" class="uk-margin-small-right"></span>info@maxterk.com</li>
+                    <li class="text-white"> <span uk-icon="icon: phone" class="uk-margin-small-right"></span> +977 98464844676 /  <br>
+                       +977 984556565</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-<!-- end page_content-->
-<div class="uk-clearfix">
-
-</div>
-</div>
-<script src="{{asset('themes-assets/js/uikit-icons.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('themes-assets/menu/js/stellarnav.min.js')}}"></script>
-<script type="text/javascript">
-// var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-// (function(){
-// var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-// s1.async=true;
-// s1.src='https://embed.tawk.to/661ba02f1ec1082f04e21e9c/1hrdujf9r';
-// s1.charset='UTF-8';
-// s1.setAttribute('crossorigin','*');
-// s0.parentNode.insertBefore(s1,s0);
-// })();
-// </script>
-<script type="text/javascript">
-// 	jQuery(document).ready(function($) {
-// 		jQuery('.stellarnav').stellarNav({
-// 			theme: 'dark',
-// 			breakpoint: 1100,
-// 			position: 'right',
-// 			phoneBtn: '+977-1-5487474547',
-// 			locationBtn: 'https://www.google.com/maps '
-// 		});
-// 	});
-// </script>
-<!-- required -->
-<script src="{{asset('themes-assets/js/jquery-ui.js')}}"></script>
-<script>
-	$(document).ready(function() {
-		$(".datepicker").datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			numberOfMonths: 1,
-			value: true,
-		});
-	})
-</script>
-<script>
-	function goBack() {
-		window.history.back();
-	}
-</script>
-<script>
-	UIkit.util.on('#js-animation-switcher', 'change', function() {
-		var value = this.value;
-		UIkit.util.$$('.js-slideshow-animation').forEach(function(slideshow) {
-			UIkit.util.attr(slideshow, 'animation', value);
-		});
-	});
-	UIkit.util.on('#js-finite-switcher', 'change', function() {
-		var value = this.value;
-		UIkit.util.$$('[uk-slideshow]').forEach(function(slideshow) {
-			UIkit.util.attr(slideshow, 'finite', value);
-		});
-	});
-</script>
-<!-- book -->
-
+</section>
+<section class="uk-position-relative bg-black-extra-light   footer-border uk-bottom-footer">
+    <div class="uk-container uk-container-large uk-position-relative uk-position-z-index uk-text-center ">
+        <hr style="border-top: 2px dotted #e5e5e5;">
+        <img src="assets/img/card.png" alt="" class="uk-margin-bottom">
+        <p class="uk-margin-remove text-white ">Copyright © 2024, Trekking Expedition. </p>
+        <p class="uk-margin-remove text-white">All Rights Reserved | Design & Developed By<a href="https://cyberlink.com.np/" class="text-secondary"> Cyberlink Pvt. Ltd.</a> </p>
+    </div>
+    <div class="uk-footer-background-overlay"></div>
+</section>
 </body>
+<script src="{{ asset('themes-assets/js/main.js') }}"></script>
+
 </html>

@@ -1,315 +1,891 @@
 @extends('themes.default.common.master')
 @section('content')
-<!-- slider -->
-@if($banner->count()>0)
-   <div class="banner">
-      <div class=" uk-position-relative uk-visible-toggle uk-light  " tabindex="-1" uk-slideshow="min-height: 350; max-height: 550; ratio: 3:2; autoplay: false; animation: pull;" >
-         <ul class="uk-slideshow-items uk-light" >
-            @if($banner != null)
-               @foreach ($banner as $row)
-                  <li class="uk-animation-fade">
-                     <img src="@if ($row->banner) {{ asset('uploads/banners/' . $row->banner) }}@else{{ asset('themes-assets/images/default/default-banner.jpg') }} @endif" alt="" uk-cover>
-                     @if($row->trip_title)
-                        <div class=" uk-text-center uk-light  ">
-                           <div class="banner-overly">
-                              <h1 class="uk-text-white uk-text-bold uk-text-banner uk-margin-remove-top uk-margin-remove-bottom   uk-text-shadow" uk-scrollspy="cls: uk-animation-slide-top-small;   delay: 600; repeat: false;">{{ $row->trip_title }}</h1>
-                              @if($row->trip_highlight)
-                                <p class="uk-margin-remove-top " uk-scrollspy="cls: uk-animation-slide-top-small;   delay: 800; repeat: false;">{{$row->trip_highlight}}</p>
-                            @endif
-                              <a href="{{ url('page/' . tripurl($row->uri)) }}" class="uk-button  uk-button-bordered-white uk-margin-bottom uk-margin-top" uk-scrollspy="cls: uk-animation-slide-top-small;   delay: 1200; repeat: false;">Explore Packages </a>
-                           </div>
-                        </div>
-                     @endif
-                  </li>
-               @endforeach
-            @endif
-         </ul>
-         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-icon="icon: chevron-left;ratio: 3" uk-slideshow-item="previous"></a>
-         <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-icon="icon: chevron-right;ratio: 3" uk-slideshow-item="next"></a>
-      </div>
-      <div class="texture">
-         <img src="{{ asset('themes-assets/images/shape-8.png')}}" alt="">
-      </div>
-   </div>
-@endif
-<!-- slider -->
-<!-- about us -->
-@if($about_data_child)
-<section class="uk-section-padding uk-padding-remove-bottom  uk-about uk-margin-large-top@m ">
-   <div class=" uk-container ">
-      <div class="uk-grid-large uk-child-width-1-2@l uk-child-width-1-2@m  uk-child-width-1-1@s uk-text-justify" uk-grid>
-         <div uk-scrollspy="cls: uk-animation-slide-top-small;delay: 200; repeat: false;">
-            <div class="uk-main-title-home uk-margin-bottom  " uk-scrollspy="cls: uk-animation-slide-top-small;  delay: 200; repeat: false">
-               <h2 class="uk-text-bold   uk-margin-remove-bottom uk-padding-remove-bottom"> {{$about_data_child->post_title}}</h2>
-               <p class="uk-text-bold">{!!$about_data_child->post_excerpt!!}</p>
-               <p>{!!$about_data_child->post_content!!}</p>
-               <a href="{{ route('page.pagedetail', $about_me->uri) }}" class="uk-button uk-button-primary">Know More  </a>
-            </div>
-         </div>
-         @if($about_data_child_images->count()>0)
-            <div uk-scrollspy="cls: uk-animation-slide-top-small; delay: 200; repeat: false;" class=" uk-flex uk-flex-center uk-flex-middle   uk-about-img-section">
-               @if($about_data_child_images->count()>1)
-                  <div class="uk-about-img uk-margin-bottom" style="margin-right:5px; width:50%;"><img src="@if($about_data_child_images[1]->file_name) {{ asset('uploads/medium/' . $about_data_child_images[1]->file_name) }}@else{{ asset('themes-assets/images/default/default-banner.jpg') }} @endif" alt=""></div>
-               @endif
-               <div class=" uk-about-img uk-padding-remove-bottom " style="margin-left:5px; width:50%; margin-top:-69px;"><img src="@if($about_data_child_images[0]->file_name) {{ asset('uploads/medium/' . $about_data_child_images[0]->file_name) }}@else{{ asset('themes-assets/images/default/default-banner.jpg') }} @endif" alt="" ></div>
-            </div>
-         @endif
-      </div>
-   </div>
-</section>
-@endif
-<!-- end about us -->
-@if($expeditions->count()>0)
-   <section class="uk-section-padding  uk-padding-remove-top">
-      <div class=" uk-container">
-         <div class="uk-main-title-home  uk-text-center uk-margin-medium-bottom" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-            <h2 class="uk-text-bold uk-margin-remove-bottom uk-padding-remove-bottom"> Find Our Expedition</h2>
-            <img src="{{asset('themes-assets/images/title-icon.png')}}" alt="">
-         </div>
-         <div class="uk-position-relative uk-visible-toggle  " tabindex="-1" uk-slider="sets: true; finite: true;">
-            <ul class="uk-slider-items uk-child-width-1-2@s  uk-child-width-1-2@m uk-text-center" uk-grid uk-scrollspy="cls: uk-animation-slide-left-small; target:h1, p, img;  delay: 100; repeat: false;">
-            @foreach($expeditions as $row)
-               @if(trip_byDestinations($row->id)->count()>0)
-                  <li>
-                     <a class="uk-list-shine uk-corner-hover uk-cover-container  uk-display-block" href="{{ route('page.destinationlist', $row->uri) }}">
-                        <div class="uk-media-520">
-                           <img class="uk-image" alt="" uk-img src="@if($row->thumbnail) {{ asset('uploads/original/' . $row->thumbnail) }} @else{{ asset('themes-assets/images/default/default-thumbnail.png') }} @endif" style="width: 100%;height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="uk-overlay-primary  uk-position-cover"></div>
-                        <div class="uk-position-center">
-                           <div class="uk-overlay ">
-                              <h1 class="main-title-font expedition-font uk-margin-remove text-white"> {{$row->title}}</h1>
-                              <p class="uk-margin-remove text-white">{{$row->content}}</p>
-                           </div>
-                        </div>
-                     </a>
-                  </li>
-               @endif
-            @endforeach
-            </ul>
-            <a class="uk-nav-slider-btn  uk-position-center-left uk-margin-small-left uk-hidden" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-            <a class="uk-nav-slider-btn  uk-position-center-right uk-margin-small-right uk-hidden" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
-            <!-- <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul> -->
-         </div>
-      </div>
-   </section>
-@endif
-<!-- Middle banner -->
-@if($post_contact_us)
-   <div class="middle-banner">
-      <div class="top-texture" >
-         <img src="{{ asset('themes-assets/images/shape-9.png')}}" alt="">
-      </div>
-      <section class="uk-section-padding uk-trip-price uk-middle-banner uk-text-center">
-         <div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; delay: 200; repeat: false;">
-            <h2 class="uk-text-bold uk-margin-remove-bottom uk-margin-top uk-padding-remove-bottom uk-text-white">{{$post_contact_us->post_title}}</h2>
-            <img src="{{asset('themes-assets/images/title-icon.png')}}" alt="">
-            <p class=" text-white">{!!$post_contact_us->post_excerpt!!}</p>
-            <a href="{{ route('page.posttype_detail', $contact_us->uri) }}" class="uk-button  uk-button-bordered-white uk-margin-bottom" uk-scrollspy="cls: uk-animation-slide-top-small;   delay: 200; repeat: false;">Contact Us </a>
-         </div>
-      </section>
-      <div class="texture">
-         <img src="{{ asset('themes-assets/images/shape-8.png')}}" alt="">
-      </div>
-   </div>
-@endif
-<!-- end Middle banner -->
-<!-- trip package -->
-@if($popular_trip)
-   @if ($popular_trip->trips->count() > 0)
-      <section class="uk-section-padding-small  uk-margin-top">
-         <div class=" uk-container">
-            <div class="uk-grid   uk-child-width-1-1@s  uk-margin-medium-bottom" uk-grid>
-                  <div class="uk-width-1-3@m" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-                     <div class="uk-main-title-home  " uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-                        <h2 class="uk-text-bold    uk-margin-remove-bottom uk-padding-remove-bottom"> Find Our Popular Trips</h2>
-                     </div>  
-                  </div>    
-                  <div  class="uk-width-2-3@m uk-margin-small-top@s uk-text-right@m"  uk-scrollspy="cls: uk-animation-slide-left-small;   delay: 100; repeat: false;" >
-                     <a href="{{ route('popular-trips') }}" class="uk-button uk-button-trip ">View all Trip</a>
-                  </div>
-            </div>
-            <div class="uk-position-relative uk-visible-toggle  " tabindex="-1" uk-slider="sets: true autoplay: true autoplay-interval: 100 ">
-               <ul class="uk-slider-items uk-child-width-1-3@l uk-child-width-1-2@m uk-child-width-1-1@s uk-grid " uk-height-match=".uk-text-wrp">
-                  @foreach ($popular_trip->trips->take(10) as $item)
-                     <li>
-                        <div class="uk-package-list">
-                           <div class=" uk-card" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-                              <a href="{{ url('page/' . tripurl($item->uri)) }}">
-                                 <div class="uk-card-media-top uk-image-200 uk-block">
-                                       <img src="@if ($item->thumbnail) {{ asset('uploads/original/' . $item->thumbnail) }}@else{{ asset('themes-assets/images/default/default-thumbnail.png') }} @endif" alt="{{ $item->trip_title }}">
-                                       <!--<div class="ribbon"> <span>USD</span>1,090</div>-->
-                                 </div>
-                              </a>
-                              <div class="">
-                                 <div class="uk-text-wrp">
-                                     <a href="{{ url('page/' . tripurl($item->uri)) }}">
-                                    <h3 class="uk-title">{{ $item->trip_title }}</h3>
-                                    </a>
-                                    <div class="uk-grid uk-child-width-1-2">
-                                       @if($item->duration)
-                                          <p class="uk-meta "><span><i class="fa fa-clock-o uk-text-primary "></i></span>{{ $item->duration }} days</p>
-                                       @endif
-                                       @if($item->group_size)
-                                          <p class="uk-meta "><span><i class="fa fa-group uk-text-primary "></i></span>{{ $item->group_size }} people</p>
-                                       @endif
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </li>
-                  @endforeach
-               </ul>
-               <a class="uk-slider-btn uk-position-center-left uk-position-small uk-hidden@l" href="#" uk-icon="icon: chevron-left;ratio: 3" uk-slider-item="previous" style="margin-top:-24px;"></a>
-               <a class="uk-slider-btn uk-position-center-right uk-position-small uk-hidden@l" href="#" uk-icon="icon: chevron-right;ratio: 3" uk-slider-item="next" style="margin-top:-24px;"></a>
-               <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
-            </div>
-         </div>
-      </section>
-   @endif
-@endif
-<!-- end pacakges   -->
-<!-- review -->
-@if(!($trip_review)->isEmpty())
-   <section class="uk-section-padding-medium pattern-mountain  uk-border-top">
-      <div class=" uk-container">
-         <div class="uk-main-title-home uk-margin-bottom uk-text-center " uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-            <h2 class="uk-text-bold">Clients Review </h2>
-            <img src="{{asset('themes-assets/images/title-icon.png')}}" alt="">
-         </div>
-         <div class="uk-text-left" uk-grid>
-            <div class="uk-width-expand@m" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-               <div class="uk-position-relative uk-visible-toggle uk-testimonials" tabindex="-1" uk-slider="autoplay: true autoplay-interval: 100">
-                  <ul class="uk-slider-items uk-child-width-1-1 uk-child-width-1-1@s uk-child-width-1-1@m">
-                     @foreach($trip_review as $row)
-                        <li>
-                           <div class="uk-testimonials-list">
-                              <img class="uk-image-user" src="@if($row->image){{ asset('uploads/reviews/' . $row->image) }}@else{{asset('themes-assets/images/default/profile.png')}}@endif" alt="user_profile">
-                              <h4 class="uk-margin-top">{{$row->name}} 
-                                 <span>{{$row->sub_title}}</span>
-                              </h4>
-                              <p> {!!$row->brief!!}</p>
-                           </div>
-                        </li>
-                     @endforeach
-                  </ul>
-                  <div class="uk-clearfix"></div>
-                  <a class=" uk-position-center-left uk-position-small uk-hidden-hover uk-slidenav-large" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
-                  <a class=" uk-position-center-right uk-position-small uk-hidden-hover uk-slidenav-large" href="#" uk-slidenav-next uk-slider-item="next"></a>
-                  <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
-                  <div class="uk-clearfix"></div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-@endif
-<!-- review -->
-<!-- start Associate and Certified  -->
-@if($partners->count()>0)
-   <section class="uk-section-padding  ">
-      <div class=" uk-container">
-         <div class="uk-main-title-home uk-margin-bottom uk-text-center" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-            <h2 class="uk-text-bold   uk-margin-remove-bottom uk-padding-remove-bottom">We are Associate and Certified</h2>
-            <img src="{{asset('themes-assets/images/title-icon.png')}}" alt="">
-         </div>
-         <div class="uk-clearfix uk-margin"> </div>
-         <div class="uk-position-relative uk-visible-toggle  " tabindex="-1" uk-slider="autoplay: true autoplay-interval: 1000">
-            <ul class="uk-grid-match uk-slider-items uk-child-width-1-4@l uk-child-width-1-2@m uk-child-width-1-1@s uk-grid" uk-scrollspy="cls: uk-animation-fade; target:.associate-item;  delay: 500;">
-               @foreach($partners as $row)
-                  <li>
-                     <div class="associate-item">
-                        <div  uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-                           <div class="associate-img"><img src="{{asset('uploads/banners/' . $row->picture)}}" alt="npl"></div>
-                           <div class="associate-text">
-                              <h4>{{$row->title}}</h4>
-                           </div>
-                        </div>
-                     </div>
-                  </li>
-               @endforeach
-            </ul>
-            <!-- <a class="uk-slider-btn uk-position-center-left uk-position-small uk-hidden-hover" href="#"  uk-icon="icon: chevron-left;ratio: 3"     uk-slider-item="previous" ></a>
-               <a class="uk-slider-btn uk-position-center-right uk-position-small uk-hidden-hover" href="#"  uk-icon="icon: chevron-right;ratio: 3"    uk-slider-item="next"></a> -->
-            <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
-         </div>
-      </div>
-   </section>
-@endif
-<!-- end Associate and Certified   -->
-<!-- start Best Selling Holidays  -->
-<!-- <section class="uk-section-padding  pattern3 uk-light">
-   <div class=" uk-container">
-       <div class="uk-main-title-home uk-margin-bottom" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-           <h2 class="uk-text-bold uk-text-white">Best Selling Holidays</h2>
-           <span class="uk-background-white"></span>
-       </div>
-       <div class="uk-position-relative uk-visible-toggle  uk-margin-top" tabindex="-1" uk-slider uk-scrollspy="cls: uk-animation-fade; target:.uk-activities-list;  delay: 500; repeat: false">
-           <ul class="uk-slider-items uk-child-width-1-3@l uk-child-width-1-2@m uk-child-width-1-1@s uk-grid">
-               <li>
-                 
-                   <div>
-                       <div class="uk-package-list" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-                           <a href="">
-                               <div class="uk-card-media-top uk-image-300 uk-block">
-                                   <div class="uk-tour-price"> <span>USD</span> 1,090</div>
-                                   <img src="images/t3.jpg" alt="">
-                                   <span class="ribbon">most popular</span>
-                                   <div class="uk-text-wrp">
-                                       <h3 class="uk-title uk-text-white">Manaslu Circuit</h3>
-                                       <p class="uk-meta uk-text-white">Duration: <strong>14</strong> days</p>
-                                   </div>
-                               </div>
-                           </a>
-                       </div>
-                   
-               </li>
-               <li>
-                  
-                   <div>
-                       <div class="uk-package-list" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-                           <a href="">
-                               <div class="uk-card-media-top uk-image-300 uk-block">
-                                   <div class="uk-tour-price"> <span>USD</span> 1,090</div>
-                                   <img src="images/t1.jpg" alt="">
-                                   <div class="uk-text-wrp">
-                                       <h3 class="uk-title uk-text-white">Annapurna Base Camp</h3>
-                                       <p class="uk-meta uk-text-white">Duration: <strong>14</strong> days</p>
-                                   </div>
-                               </div>
-                           </a>
-                       </div>
-                   
-               </li>
-               <li>
-                 
-                   <div>
-                       <div class="uk-package-list" uk-scrollspy="cls: uk-animation-fade;  delay: 500; repeat: false">
-                           <a href="">
-                               <div class="uk-card-media-top uk-image-300 uk-block">
-                                   <div class="uk-tour-price"> <span>USD</span> 1,090</div>
-                                   <img src="images/t2.jpg" alt="">
-                                   <span class="ribbon">most popular</span>
-                                   <div class="uk-text-wrp">
-                                       <h3 class="uk-title uk-text-white">Everest Base Camp Trek</h3>
-                                       <p class="uk-meta uk-text-white">Duration: <strong>14</strong> days</p>
-                                   </div>
-                               </div>
-                           </a>
-                       </div>
-                     
-               </li>
-           </ul>
-           <a class="uk-slider-btn uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-icon="icon: chevron-left;ratio: 3" uk-slider-item="previous"></a>
-           <a class="uk-slider-btn uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-icon="icon: chevron-right;ratio: 3" uk-slider-item="next"></a>
-           <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin  "></ul>
+
+<!-- banner section start -->
+<div class="bg-light-blue uk-homepage-banner uk-position-relative" uk-scrollspy="cls: uk-animation-fade; target: h1,p,a; delay: 200;">
    
-           <div class="uk-margin-top uk-text-center">
-               <a href="trekking.php" class="uk-button uk-button-bordered-white">View All</a>
-           </div>
-       </div>
-   </div>
-   </section> -->
-<!-- end Best Selling Holidays   -->
+    <div class="uk-text-center uk-homepage-banner-text uk-width-1-1" style="padding: 35px;">
+        <h1 class="text-primary fw-600 uk-margin-remove uk-h1">Adventure Awaits <span class="text-secondary">In The Mountain</span></h1>
+        <p class="text-primary fw-600 uk-margin-small-top">Our handpicked itineraries for your next holidays</p>
+        <div>
+            <a href="list.php" class="uk-small-btn uk-small-btn-primary">
+                View Trips <span uk-icon="icon: arrow-right"></span>
+            </a>
+        </div>
+    </div>
+     <img src="assets/img/banner.png" alt="" loading="lazy">
+</div>
+<!-- banner section end -->
+
+<!-- about section start -->
+<section class="uk-section-large bg-primary uk-padding-remove-top">
+    <div class="uk-container-large uk-container pt-40">
+        <div class="uk-flex uk-flex-middle" uk-grid>
+            <div class="uk-width-1-3@m">
+                <div class="uk-grid-collapse uk-grid" uk-scrollspy="cls: uk-animation-fade; target: h2,img; delay: 200;">
+                    <div class="uk-width-auto">
+                        <div class="rotated-text">
+                            <h2 class="text-secondary">27 YEARS OF <span class="text-white">EXCELLENCE</span></h2>
+                        </div>
+                    </div>
+                    <div class="uk-width-expand">
+                        <div class="uk-media-400">
+                            <img src="assets/img/mountain/mountain-1.jpeg" alt="" class="about-img" loading="lazy">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="uk-width-2-3@m" uk-scrollspy="cls: uk-animation-fade; target: span,h1,p,a; delay: 200;">
+                <div>
+                    <span class="section-tag">Trending Destination <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
+                    <h1 class="text-white fw-600 uk-margin-small-top">Experience New Destination</h1>
+                    <p class="text-white uk-text-justify">
+                        Max Trekking is your trusted companion for unforgettable mountain adventures across Nepal. We offer expertly guided treks, tailored itineraries, and authentic local experiences designed for every level of traveler. With safety, comfort, and responsible tourism at our core, we help you explore the Himalayas the right way. <br><br>Max Trekking is your trusted companion for unforgettable mountain adventures across Nepal. We offer expertly guided treks, tailored itineraries, and authentic local experiences designed for every level of traveler. With safety, comfort, and responsible tourism at our core, we help you explore the Himalayas the right way. At Max Trekking, we believe that every journey into the Himalayas should be inspiring, safe, and deeply meaningful. Based in Nepal, we specialize in organizing guided treks, expeditions, and custom adventure trips across some of the world’s most iconic trails.
+                    </p>
+                    <a href="about.php" class="uk-small-btn uk-small-btn-white">
+                        View More <span uk-icon="icon: arrow-right"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- about section end -->
+
+<!-- trekking section start -->
+<section class="uk-section bg-light-blue uk-blue-shape-bottom uk-position-relative">
+    <div class="uk-container-large uk-container">
+        <div>
+            <div class="uk-position-relative uk-visible-toggle uk-margin-top" tabindex="-1" uk-slider>
+                <div class="uk-margin-medium-bottom" uk-grid uk-scrollspy="cls: uk-animation-fade; target: span,h1,a; delay: 200;">
+                    <div class="uk-width-2-3@s">
+                        <span class="section-tag">Traveler's Choice <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
+                        <h1 class="text-primary fw-600 uk-margin-small-top">Featured Trekking Iternaries </h1>
+                    </div>
+                    <div class="uk-width-1-3@s uk-visible@s">
+                        <div class="uk-flex uk-flex-right">
+                            <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous uk-slider-item="previous" style="left: 18px !important;"></a>
+                            <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next uk-slider-item="next"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m  uk-child-width-1-4@l  uk-grid uk-grid-small " uk-scrollspy="cls: uk-animation-fade; target: .uk-travel-card; delay: 200;">
+                    <div>
+                        <div class="uk-travel-card bg-white">
+                            <div>
+                                <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                                    <img src="assets/img/mountain/mountain-2.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                                </a>
+                            </div>
+                            <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                                <div class="uk-width-2-3">
+                                    <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                                </div>
+                                <div class="uk-width-1-3  text-primary uk-text-right ">
+                                    <i class="fa-solid fa-star text-secondary"></i> 4.0
+                                </div>
+                            </div>
+                            <div class="uk-travel-price uk-flex uk-flex-between">
+                                <div>
+                                    <span>
+                                        <b class="text-primary f-18">$1234</b>
+                                    </span>
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                                    11-15 Days
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-travel-card bg-white">
+                            <div>
+                                <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                                    <img src="assets/img/mountain/mountain-3.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                                </a>
+                            </div>
+                            <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                                <div class="uk-width-2-3">
+                                    <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                                </div>
+                                <div class="uk-width-1-3  text-primary uk-text-right ">
+                                    <i class="fa-solid fa-star text-secondary"></i> 4.0
+                                </div>
+                            </div>
+                            <div class="uk-travel-price uk-flex uk-flex-between">
+                                <div>
+                                    <span>
+                                        <b class="text-primary f-18">$1234</b>
+                                    </span>
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                                    11-15 Days
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-travel-card bg-white">
+                            <div>
+                                <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                                    <img src="assets/img/mountain/mountain-4.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                                </a>
+                            </div>
+                            <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                                <div class="uk-width-2-3">
+                                    <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                                </div>
+                                <div class="uk-width-1-3  text-primary uk-text-right ">
+                                    <i class="fa-solid fa-star text-secondary"></i> 4.0
+                                </div>
+                            </div>
+                            <div class="uk-travel-price uk-flex uk-flex-between">
+                                <div>
+                                    <span>
+                                        <b class="text-primary f-18">$1234</b>
+                                    </span>
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                                    11-15 Days
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-travel-card bg-white">
+                            <div>
+                                <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                                    <img src="assets/img/mountain/mountain1.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                                </a>
+                            </div>
+                            <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                                <div class="uk-width-2-3">
+                                    <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                                </div>
+                                <div class="uk-width-1-3  text-primary uk-text-right ">
+                                    <i class="fa-solid fa-star text-secondary"></i> 4.0
+                                </div>
+                            </div>
+                            <div class="uk-travel-price uk-flex uk-flex-between">
+                                <div>
+                                    <span>
+                                        <b class="text-primary f-18">$1234</b>
+                                    </span>
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                                    11-15 Days
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="uk-travel-card bg-white">
+                            <div>
+                                <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                                    <img src="assets/img/mountain/mountain2.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                                </a>
+                            </div>
+                            <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                                <div class="uk-width-2-3">
+                                    <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                                </div>
+                                <div class="uk-width-1-3  text-primary uk-text-right ">
+                                    <i class="fa-solid fa-star text-secondary"></i> 4.0
+                                </div>
+                            </div>
+                            <div class="uk-travel-price uk-flex uk-flex-between">
+                                <div>
+                                    <span>
+                                        <b class="text-primary f-18">$1234</b>
+                                    </span>
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                                </div>
+                                <div class="uk-flex uk-flex-middle">
+                                    <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                                    11-15 Days
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="uk-flex uk-flex-center uk-hidden@s">
+                    <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous uk-slider-item="previous" style="left: 18px !important;"></a>
+                    <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next uk-slider-item="next"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- trekking section end -->
+
+<!-- destination section start -->
+<section class="uk-section">
+    <div class="uk-container-large uk-container">
+        <div>
+            <div class="uk-position-relative uk-visible-toggle uk-margin-top" tabindex="-1" uk-slider>
+                <div class="uk-margin-medium-bottom" uk-grid uk-scrollspy="cls: uk-animation-fade; target: span,h1,a; delay: 200;">
+                    <div class="uk-width-2-3@s">
+                        <span class="section-tag">Trending Destination <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
+                        <h1 class="text-primary fw-600 uk-margin-small-top">Experience New Destination </h1>
+                    </div>
+                    <div class="uk-width-1-3@s uk-visible@s">
+                        <div class="uk-flex uk-flex-right">
+                            <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous uk-slider-item="previous" style="left: 18px !important;"></a>
+                            <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next uk-slider-item="next"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid uk-grid-small" uk-scrollspy="cls: uk-animation-fade; target: .uk-region; delay: 200;">
+                    <div class="uk-region">
+                        <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle border uk-media-400 border-rounded">
+                            <img src="assets/img/mountain/mountain1.jpeg" class="border uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+                            <div class="uk-overlay-default uk-position-cover uk-destination-overlay"></div>
+                            <div class="uk-overlay uk-position-center ">
+                                <h2 class="uk-text-uppercase uk-text-bold uk-text-center text-white f-28">everest region</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="uk-region">
+                        <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle border uk-media-400 border-rounded">
+                            <img src="assets/img/mountain/mountain2.jpeg" class="border uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+                            <div class="uk-overlay-default uk-position-cover uk-destination-overlay"></div>
+                            <div class="uk-overlay uk-position-center ">
+                                <h2 class="uk-text-uppercase uk-text-bold uk-text-center text-white f-28">everest region</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="uk-region">
+                        <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle border uk-media-400 border-rounded">
+                            <img src="assets/img/mountain/mountain3.jpeg" class="border uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+                            <div class="uk-overlay-default uk-position-cover uk-destination-overlay"></div>
+                            <div class="uk-overlay uk-position-center ">
+                                <h2 class="uk-text-uppercase uk-text-bold uk-text-center text-white f-28">Annapurna region</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="uk-region">
+                        <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle border uk-media-400 border-rounded">
+                            <img src="assets/img/mountain/mountain4.jpeg" class="border uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+                            <div class="uk-overlay-default uk-position-cover uk-destination-overlay"></div>
+                            <div class="uk-overlay uk-position-center ">
+                                <h2 class="uk-text-uppercase uk-text-bold uk-text-center text-white f-28">Makalu region</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="uk-region">
+                        <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle border uk-media-400 border-rounded">
+                            <img src="assets/img/mountain/mountain5.jpeg" class="border uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+                            <div class="uk-overlay-default uk-position-cover uk-destination-overlay"></div>
+                            <div class="uk-overlay uk-position-center ">
+                                <h2 class="uk-text-uppercase uk-text-bold uk-text-center text-white f-28">lantang region</h2>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="uk-region">
+                        <a href="list.php" class="uk-display-block uk-inline-clip uk-transition-toggle border uk-media-400 border-rounded">
+                            <img src="assets/img/mountain/mountain6.jpeg" class="border uk-transition-scale-up uk-transition-opaque" loading="lazy" alt="">
+                            <div class="uk-overlay-default uk-position-cover uk-destination-overlay"></div>
+                            <div class="uk-overlay uk-position-center ">
+                                <h2 class="uk-text-uppercase uk-text-bold uk-text-center text-white f-28">Manasulu region</h2>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="uk-flex uk-flex-center uk-hidden@s">
+                    <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous uk-slider-item="previous" style="left: 18px !important;"></a>
+                    <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next uk-slider-item="next"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- destination section end -->
+
+<!-- package section start -->
+<section class="uk-section bg-light-blue">
+    <div class="uk-container-large uk-container">
+        <div uk-grid uk-scrollspy="cls: uk-animation-fade; target: span,h1,a; delay: 200;">
+            <div class="uk-width-2-3@s">
+                <span class="section-tag">Traveler's Tours <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
+                <h1 class="text-primary fw-600 uk-margin-small-top">Featured travel Packages</h1>
+            </div>
+            <div class="uk-width-1-3@s uk-visible@s uk-flex uk-flex-right uk-flex-middle">
+                <a href="list.php" class="uk-flex uk-btn uk-btn-primary">
+                    <div class="uk-btn-front">
+                        View All Trip
+                    </div>
+                    <div class="uk-btn-back">
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class=" uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-grid-small" uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-travel-card; delay: 200;">
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain1.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain2.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain3.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain4.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain5.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain6.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain-1.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-travel-card bg-white">
+                    <div>
+                        <a href="detail.php" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain-2.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-2-3">
+                            <a href="detail.php" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
+                        </div>
+                        <div class="uk-width-1-3  text-primary uk-text-right ">
+                            <i class="fa-solid fa-star text-secondary"></i> 4.0
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-flex uk-flex-between">
+                        <div>
+                            <span>
+                                <b class="text-primary f-18">$1234</b>
+                            </span>
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                        </div>
+                        <div class="uk-flex uk-flex-middle">
+                            <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                            11-15 Days
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" uk-margin-top uk-hidden@s">
+            <a href="list.php" class="uk-flex uk-btn uk-btn-primary uk-flex-center uk-flex-middle">
+                <div class="uk-btn-front">
+                    View All Trip
+                </div>
+                <div class="uk-btn-back">
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- package section end -->
+
+<!-- review section start -->
+<section class="uk-section">
+    <div class="uk-container-large uk-container">
+        <div class="uk-grid-collapse" uk-grid uk-scrollspy="cls: uk-animation-fade; target: span,h1,img; delay: 200;">
+            <div class="uk-width-2-3@s">
+                <span class="section-tag">Traveler's Review <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
+                <h1 class="text-primary fw-600 uk-margin-small-top">Know What Our Customers Say</h1>
+            </div>
+            <div class="uk-width-1-3@s  uk-flex uk-flex-center uk-flex-right@s uk-flex-middle">
+                <img src="assets/img/trip.png" height="150" alt="" loading="lazy" style="height:85px;">
+            </div>
+        </div>
+        <div class="uk-position-relative uk-visible-toggle uk-margin-top" tabindex="-1" uk-slider>
+
+            <div class="uk-slider-items uk-child-width-1-1 uk-child-width-1-2@m uk-child-width-1-3@l uk-grid " uk-scrollspy="cls: uk-animation-fade; target: .mt-65; delay: 200;">
+                <div class="mt-65">
+                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
+                        <div>
+                            <img src="assets/img/04.png" alt="" class="uk-client-img" loading="lazy">
+                        </div>
+                        <div class="uk-margin-small-top">
+                            <div class="uk-flex uk-flex-between uk-flex-middle">
+                                <div>
+                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
+                                    <small class="f-16">Company Name</small>
+                                </div>
+                                <div>
+                                    <div class="uk-flex uk-flex-right">
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                            <button class="read-more-btn">Read More </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-65">
+                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
+                        <div>
+                            <img src="assets/img/01.png" alt="" class="uk-client-img" loading="lazy">
+                        </div>
+                        <div class="uk-margin-small-top">
+                            <div class="uk-flex uk-flex-between uk-flex-middle">
+                                <div>
+                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
+                                    <small class="f-16">Company Name</small>
+                                </div>
+                                <div>
+                                    <div class="uk-flex uk-flex-right">
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                            <button class="read-more-btn">Read More </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-65">
+                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
+                        <div>
+                            <img src="assets/img/02.png" alt="" class="uk-client-img" loading="lazy">
+                        </div>
+                        <div class="uk-margin-small-top">
+                            <div class="uk-flex uk-flex-between uk-flex-middle">
+                                <div>
+                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
+                                    <small class="f-16">Company Name</small>
+                                </div>
+                                <div>
+                                    <div class="uk-flex uk-flex-right">
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                            <button class="read-more-btn">Read More </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-65">
+                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
+                        <div>
+                            <img src="assets/img/03.png" alt="" class="uk-client-img" loading="lazy">
+                        </div>
+                        <div class="uk-margin-small-top">
+                            <div class="uk-flex uk-flex-between uk-flex-middle">
+                                <div>
+                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
+                                    <small class="f-16">Company Name</small>
+                                </div>
+                                <div>
+                                    <div class="uk-flex uk-flex-right">
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
+                            <button class="read-more-btn">Read More </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-flex uk-flex-center">
+                <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous uk-slider-item="previous" style="left: 18px !important;"></a>
+                <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next uk-slider-item="next"></a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- review section end -->
+
+<!-- blog section start -->
+<section class="uk-section bg-light-blue">
+    <div class="uk-container-large uk-container">
+        <div uk-grid uk-scrollspy="cls: uk-animation-fade; target: span,h1,a; delay: 200;">
+            <div class="uk-width-2-3@s">
+                <span class="section-tag">Blog / Articles <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
+                <h1 class="text-primary fw-600 uk-margin-small-top">Featured Blogs & Articles</h1>
+            </div>
+            <div class="uk-width-1-3@s uk-visible@s uk-flex uk-flex-right uk-flex-middle">
+                <a href="blog.php" class="uk-flex uk-btn uk-btn-primary">
+                    <div class="uk-btn-front">
+                        View All Blogs
+                    </div>
+                    <div class="uk-btn-back">
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class=" uk-child-width-1-1 uk-child-width-1-2@s uk-grid-small" uk-grid uk-scrollspy="cls: uk-animation-fade; target: .uk-blog-card; delay: 200;">
+            <div class="uk-margin-top">
+                <div class="uk-blog-card">
+                    <div>
+                        <a href="blog-detail.php" class="uk-media-260 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/mountain/mountain-4.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-1-1">
+                            <a href="blog-detail.php" class="two-line">
+                                <h3 class="f-20 fw-600 uk-margin-remove">Annapurna Base Recommended Packing List for Everest Three Passes Trek Camp Trek - 14 Days</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-margin-remove uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
+                        <div class=" uk-width-1-2@m uk-width-2-3@l">
+                            <div class="uk-flex " style="gap:25px;">
+                                <div class="uk-flex uk-flex-middle text-primary fw-600">
+                                    <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                                </div>
+                                <div class="uk-flex uk-flex-middle text-primary fw-600">
+                                    <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                                    June 24,2025
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" uk-width-1-2@m uk-width-1-3@l uk-flex uk-flex-left uk-flex-right@m uk-flex-middle uk-margin-small-top">
+                            <a href="blog-detail.php" class="uk-flex uk-btn uk-btn-primary">
+                                <div class="uk-btn-front">
+                                    View The Blog
+                                </div>
+                                <div class="uk-btn-back">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <div class="uk-blog-card">
+                    <div>
+                        <a href="blog-detail.php" class="uk-media-260 uk-inline-clip uk-transition-toggle border-rounded">
+                            <img src="assets/img/about.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="">
+                        </a>
+                    </div>
+                    <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                        <div class="uk-width-1-1">
+                            <a href="blog-detail.php" class="two-line">
+                                <h3 class="f-20 fw-600 uk-margin-remove">Annapurna Base Recommended Packing List for Everest Three Passes Trek Camp Trek - 14 Days</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="uk-travel-price uk-margin-remove uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
+                        <div class=" uk-width-1-2@m uk-width-2-3@l">
+                            <div class="uk-flex " style="gap:25px;">
+                                <div class="uk-flex uk-flex-middle text-primary fw-600">
+                                    <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                                </div>
+                                <div class="uk-flex uk-flex-middle text-primary fw-600">
+                                    <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                                    June 24,2025
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" uk-width-1-2@m uk-width-1-3@l uk-flex uk-flex-left uk-flex-right@m uk-flex-middle uk-margin-small-top">
+                            <a href="blog-detail.php" class="uk-flex uk-btn uk-btn-primary">
+                                <div class="uk-btn-front">
+                                    View The Blog
+                                </div>
+                                <div class="uk-btn-back">
+                                    <i class="fa-solid fa-circle-arrow-right"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" uk-margin-top uk-hidden@s">
+            <a href="blog.php" class="uk-flex uk-btn uk-btn-primary uk-flex-center uk-flex-middle">
+                <div class="uk-btn-front">
+                    View All Blogs
+                </div>
+                <div class="uk-btn-back">
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- blog section end -->
+
+<!-- contact section start -->
+<section class="uk-section uk-section-small uk-padding-remove-bottom bg-light-blue" uk-scrollspy="cls: uk-animation-fade; target: img,p,a; delay: 200;">
+    <div class="uk-container uk-container-small">
+        <div class="border-rounded bg-primary uk-text-center uk-padding uk-blue-contact">
+            <img src="assets/img/logo_white.png" alt="" loading="lazy">
+            <p class="text-white">Allow our experts to help you plan one of the most memorable vacations based on your interests. With their in-depth knowledge and expertise of the Himalayas, craft the journey of your dreams taking into account your preferred location, time frame, and budget. For a beautiful vacation on top of the globe, contact us.</p>
+            <div class="uk-flex uk-flex-center uk-flex-middle">
+                <a href="contact.php" class="uk-flex uk-btn uk-btn-secondary">
+                    <div class="uk-btn-front">
+                        Contact Us
+                    </div>
+                    <div class="uk-btn-back">
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- contact section end -->
+
+<script>
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const text = this.previousElementSibling;
+
+            text.classList.toggle('expanded');
+
+            this.textContent = text.classList.contains('expanded') ?
+                "Read Less" :
+                "Read More";
+        });
+    });
+</script>
+
 @endsection

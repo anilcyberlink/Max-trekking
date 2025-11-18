@@ -34,27 +34,24 @@
                         <ul class="uk-navbar-nav uk-position-relative">
                             <li><a href="{{ url('/') }}">Home</a></li>
                             <li>
-                                <a href="#">Company <span uk-navbar-parent-icon></span></a>
+                                <a>Company <span uk-navbar-parent-icon></span></a>
                                 <div class="uk-navbar-dropdown">
                                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                                        <li><a href="about.php">About</a></li>
-                                        <li><a href="whyus.php">Why Us</a></li>
-                                        <li><a href="team.php">Team</a></li>
-                                        <li><a href="faq.php">FAQ</a></li>
-                                        <li><a href="document.php">Legal Document</a></li>
-                                        <li><a href="info.php">Information</a></li>
+                                        @foreach ($navigations as $row)
+                                            <li><a href="{{ route('page.posttype_detail',$row->uri) }}">{{ $row->post_type}}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </li>
                             <li>
-                                <a href="#">Expedition <span uk-navbar-parent-icon></span></a>
+                                <a>Expedition <span uk-navbar-parent-icon></span></a>
                                 <div class="uk-dropbar uk-dropbar-top" uk-drop="offset: 5; boundary:!.uk-navbar-lenght; stretch: x; flip: false; animation: reveal-top; delay-hide: 100; duration: 700;">
                                     <div class="uk-container ">
                                         <ul class="uk-flex-center uk-travel-tabs" data-uk-tab="{connect:'.uk-switcher'}">
                                             <li><a href="#">8000ERS</a></li>
                                             <li><a href="#">7000ERS</a></li>
                                             <!-- <li class="uk-active"><a href="#">5000ERS</a></li>
-                                             <li class="uk-active"><a href="#">6000ERS</a></li> -->
+                                            <li class="uk-active"><a href="#">6000ERS</a></li> -->
                                         </ul>
                                         <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
                                             <div>

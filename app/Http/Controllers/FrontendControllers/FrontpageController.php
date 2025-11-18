@@ -91,9 +91,11 @@ class FrontpageController extends Controller
           $data['template'] = $data['template'];
         }
         if($data){
-          $posts = PostModel::where(['post_type'=>$data->id,'status'=>'1','post_parent'=>'0'])->orderBy('post_order','desc')->paginate(12);
+          $posts = PostModel::where(['post_type'=>$data->id,'status'=>'1','post_parent'=>'0'])->with('associated_posts')->orderBy('post_order','asc')->paginate(12);
         }
         $items = PostModel::where(['post_type'=>$data->id,'post_parent'=>'0'])->orderBy('post_order','asc')->get();
+
+        // dd($data,$posts);
         return view('themes.default.'.$data['template'].'', compact('trekkings','expeditions','data','posts','items'));
       }
   

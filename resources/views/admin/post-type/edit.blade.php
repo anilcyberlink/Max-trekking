@@ -22,19 +22,19 @@
 						</div>
 					</div>
 				</div>  
-        <!-- <div class="form-group">
+        <div class="form-group">
 					<label for="inputStandard" class="col-lg-2 control-label">Caption</label>
 					<div class="col-lg-9">
 						<div class="bs-component">
 							<input type="text" id="post_tag" name="post_tag" class="form-control" placeholder="" value="{{$data->post_tag}}" />
 						</div>
 					</div>
-				</div>         -->
+				</div>
 				<div class="form-group">
 					<label for="inputStandard" class="col-lg-2 control-label"> Uri</label>
 					<div class="col-lg-9">
 						<div class="bs-component">
-							<input type="text"  name="uri" class="form-control" placeholder="" value="{{$data->uri}}" readonly />
+							<input type="text" id="uri" name="uri" class="form-control" placeholder="" value="{{$data->uri}}" readonly />
 						</div>
 					</div>
 				</div> 
@@ -60,14 +60,14 @@
 					</div>
 				</div>
 				
-		    <!-- <div class="form-group">
+		    <div class="form-group">
           <label class="col-lg-2 control-label" for="textArea3"> Brief </label>
           <div class="col-lg-9">
             <div class="bs-component">
               <textarea class="form-control my-editor" id="editor2" name="brief" rows="15"> {{ $data->brief }}</textarea>
             </div>
           </div>
-        </div> -->
+        </div>
           
 		  <div class="form-group">
             <label class="col-lg-2 control-label" for="textArea3"> Content </label>
@@ -132,7 +132,7 @@
     </label>
     </div>
     
-    {{-- <div class="sid_bvijay mb10">
+    <div class="sid_bvijay mb10">
       <h4> Thumbnail </h4>
       <div class="hd_show_con">
         <div id="xedit-demo">
@@ -145,22 +145,22 @@
           <input type="file" name="thumbnail" />
         </div>
       </div>
-    </div> --}}
+    </div>
 
-  {{--<div class="sid_bvijay mb10">
-    <h4> Banner </h4>
-    <div class="hd_show_con">
-      <div id="xedit-demo">
-      @if($data->banner)
-            <span class="banner_id{{$data->id}}">
-            <a href="#{{$data->id}}" class="imagedelete">X</a>
-          <img src="{{asset(env('PUBLIC_PATH').'uploads/original/' . $data->banner )}}" width="150" class="responsive" alt="{{ $data->post_type}}"/>
-          </span><hr>
-          @endif
-        <input type="file" name="banner" />
+    <div class="sid_bvijay mb10">
+      <h4> Banner </h4>
+      <div class="hd_show_con">
+        <div id="xedit-demo">
+        @if($data->banner)
+              <span class="banner_id{{$data->id}}">
+              <a href="#{{$data->id}}" class="imagedelete">X</a>
+            <img src="{{asset(env('PUBLIC_PATH').'uploads/original/' . $data->banner )}}" width="150" class="responsive" alt="{{ $data->post_type}}"/>
+            </span><hr>
+            @endif
+          <input type="file" name="banner" />
+        </div>
       </div>
     </div>
-  </div> --}}
 </div>          
 </div>
 

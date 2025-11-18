@@ -20,6 +20,7 @@ class HeaderComposer{
     }
 
 	public function compose(View $view){
+		$view->with('navigations', PostTypeModel::where(['is_menu'=>'1'])->orderBy('ordering','asc')->get());
 		// $view->with('nav_trekkings', PostTypeModel::where(['is_menu'=>'1'])->where(['id'=>'3'])->first());
 		// $view->with('nav_expeditions', PostTypeModel::where(['is_menu'=>'1'])->where(['id'=>'2'])->first());
 		$view->with('nav_about_us', PostTypeModel::where(['is_menu'=>'1'])->where(['id'=>'1'])->first());
@@ -28,8 +29,6 @@ class HeaderComposer{
 		$view->with('expeditions',DestinationModel::orderBy('ordering','asc')->get()); //->expeditions in header
 		$view->with('regions',RegionModel::orderBy('ordering','asc')->take(6)->get()); //->regions in header
 
-		// $data = PageModel::where(['page_type' => $pages->id, 'status' => '1'])->orderBy('page_order', 'asc')->first();
-    // $detail=PageDetails::where('page_id',$data->id)->orderBy('id','asc')->get();
 		$view->with('pagetypes',PageTypeModel::whereHas('page_data')->whereHas('page_details')->where(['is_menu'=>'1'])->orderBy('ordering','asc')->get()); //->pagetypes
 
 

@@ -131,7 +131,9 @@ class AssociatedPostController extends Controller
         }
 
       $data->title = $request->title;
+      $data->sub_title = $request->sub_title;
       $data->brief = $request->brief;
+      $data->star = $request->star;
       $data->ordering = $request->ordering;
       if($data->save()){
         return redirect()->back()->with('success','Update Sucessfully.');

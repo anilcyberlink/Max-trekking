@@ -91,7 +91,7 @@ class FrontpageController extends Controller
           $data['template'] = $data['template'];
         }
         if($data){
-          $posts = PostModel::where(['post_type'=>$data->id,'status'=>'1','post_parent'=>'0'])->with('associated_posts')->orderBy('post_order','asc')->paginate(12);
+          $posts = PostModel::where(['post_type'=>$data->id,'status'=>'1','post_parent'=>'0'])->with('associated_posts')->orderBy('post_order','asc')->paginate(8);
         }
         $items = PostModel::where(['post_type'=>$data->id,'post_parent'=>'0'])->orderBy('post_order','asc')->get();
 
@@ -119,7 +119,7 @@ class FrontpageController extends Controller
         $post_type_id = intval($post->post_type);
         $post_type = PostTypeModel::where('id', $post_type_id)->first();
         $local = PostTypeModel::whereIn('id',['20','19'])->get();
-        $related= PostModel::whereIn('post_parent',['22','23','24'])->where('id','!=',$data->id)->orderBy('post_order','desc')->take(6)->get();
+        $related= PostModel::where('post_type',$data->post_type)->where('id','!=',$data->id)->orderBy('post_order','desc')->take(5)->get();
         $trip_review = TripReview::where('status', 1)->orderBy('id', 'desc')->paginate(10);
         $team = TeamModel::where(['status'=>'1'])->paginate(12);
         $terms_policy = PostModel::where(['post_type'=>'16','status'=>'1','post_parent'=>'0'])->get();

@@ -350,7 +350,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="blog.php">Blog</a></li>
+                            <li><a href="{{ route('page.posttype_detail',$blogs->uri) }}">{{ $blogs->post_type }}</a></li>
                         </ul>
                     </div>
                     <div class="uk-navbar-right">

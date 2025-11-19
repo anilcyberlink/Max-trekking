@@ -355,9 +355,9 @@
                     </div>
                     <div class="uk-navbar-right">
                         <div class="uk-flex uk-flex-middle uk-flex-right">
-                            <a href="contact.php" class="uk-flex uk-btn uk-btn-secondary">
+                            <a href="{{ route('page.posttype_detail',$contact->uri) }}" class="uk-flex uk-btn uk-btn-secondary">
                                 <div class="uk-btn-front">
-                                    Contact Now
+                                    {{ $contact->post_type }}
                                 </div>
                                 <div class="uk-btn-back">
                                     <i class="fa-solid fa-circle-arrow-right"></i>

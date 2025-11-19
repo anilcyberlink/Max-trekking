@@ -120,7 +120,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <p class="review-text">{{ $row->brief }}</p>
+                                    <p class="review-text">{{ $row->brief }}</p>
                                     <button class="read-more-btn">Read More </button>
                                 </div>
                             </div>

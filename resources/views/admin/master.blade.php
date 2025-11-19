@@ -108,7 +108,7 @@
                         </a>
                     </li>
                     <li class="">
-                        @if(Request::segment(2) == 'posttype' || Request::segment(2) == 'postcategory' || Request::segment(2) == 'company' || Request::segment(2) == 'terms-and-polices' || Request::segment(2) == 'festive-celerbations' || Request::segment(2) == 'local-experiences' || Request::segment(2) == 'contact-now' || Request::segment(2) == 'about'|| Request::segment(3) == 'about' || Request::segment(2) == 'faq')
+                        @if(Request::segment(2) == 'posttype' || Request::segment(2) == 'postcategory' || Request::segment(2) == 'company' || Request::segment(2) == 'terms-and-polices' || Request::segment(2) == 'festive-celerbations' || Request::segment(2) == 'local-experiences' || Request::segment(2) == 'contact-now' || Request::segment(2) == 'about'|| Request::segment(3) == 'about' || Request::segment(2) == 'team' || Request::segment(3) == 'team'|| Request::segment(2) == 'faq'|| Request::segment(2) == 'blog'|| Request::segment(2) == 'legal-document'|| Request::segment(2) == 'why-us')
                             <a class="accordion-toggle menu-open">
                         @else
                             <a class="accordion-toggle">

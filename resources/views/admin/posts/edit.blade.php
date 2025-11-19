@@ -74,16 +74,17 @@
                     @else
                     <input type="hidden" id="" name="post_parent" class="form-control" placeholder=""  value="0" />
                     @endif           
-                  
-                    <div class="form-group">
-                      <label class="col-lg-2 control-label" for="textArea3"> Brief </label>
-                      <div class="col-lg-9">
-                        <div class="bs-component">
-                          <textarea class="form-control my-editor" id="textArea3" name="post_excerpt" rows="3"> {{ $data->post_excerpt }}</textarea>
+                  @if(Request::segment(2)!='legal-document')
+                    @if(Request::segment(2)!='faq')
+                      <div class="form-group">
+                        <label class="col-lg-2 control-label" for="textArea3"> Brief </label>
+                        <div class="col-lg-9">
+                          <div class="bs-component">
+                            <textarea class="form-control my-editor" id="textArea3" name="post_excerpt" rows="3"> {{ $data->post_excerpt }}</textarea>
+                          </div>
                         </div>
                       </div>
-                    </div>
-
+                    @endif
                     <div class="form-group">
                       <label class="col-lg-2 control-label" for="textArea2">Content</label>
                       <div class="col-lg-10">
@@ -92,6 +93,7 @@
                         </div>
                       </div>
                     </div>
+                  @endif
                   
                     <div class="form-group">
                       <label for="inputStandard" class="col-lg-2 control-label">Meta Key</label>
@@ -158,13 +160,14 @@
                   </label>
                 </div>
 
-                <div class="sid_bvijay mb10">
+                <!-- <div class="sid_bvijay mb10">
                   <div class="hd_show_con">
                       Show project in home                        
                     <input type="checkbox" name="show_in_home" value="{{ $data->show_in_home }}" {{ $data->show_in_home == 1 ? 'checked' : '' }} /> 
                   </div>
-                </div>
+                </div> -->
 
+              @if(Request::segment(2)!='faq')
                 <div class="sid_bvijay mb10">
                   <h4> Page Banner </h4>
                     <div class="hd_show_con">
@@ -198,6 +201,7 @@
                      <small>(width: 1600px height: 1200px)</small>
                   </div>
                 </div>
+              @endif
 
               </div>        
             </div>

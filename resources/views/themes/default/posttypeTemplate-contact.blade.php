@@ -58,6 +58,7 @@
         <div class="uk-grid uk-grid-collapse uk-grid-match uk-margin-top uk-child-width-1-2@m">
             <div class="uk-box-shadow-medium uk-padding uk-margin-top">
                 <form class="uk-grid-small" uk-grid>
+                    @csrf
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label text-primary" for="Name">Full Name:</label>
                         <input class="uk-input border-rounded bg-text" name="full_name" type="text" aria-label="Name">

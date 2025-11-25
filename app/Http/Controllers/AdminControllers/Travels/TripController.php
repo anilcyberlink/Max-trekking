@@ -85,7 +85,6 @@ class TripController extends Controller
             $validator = Validator::make($request->all(), [
               'trip_title' => 'required|unique:cl_trip_details,trip_title',
               'starting_price' => 'numeric|nullable',
-              'route'=> 'numeric|nullable',
               'discount' => 'numeric|nullable'
 
             ]);
@@ -408,7 +407,6 @@ class TripController extends Controller
             $validator = Validator::make($request->all(), [
                 'trip_title' => 'required|unique:cl_trip_details,trip_title,' . $id,
                'starting_price' => 'numeric|nullable',
-              'route'=> 'numeric|nullable',
               'discount' => 'numeric|nullable'
                 
             ]);
@@ -551,6 +549,7 @@ class TripController extends Controller
             $data->walking_per_day = $request->walking_per_day;
             $data->group_size = $request->group_size;
             $data->accommodation = $request->accommodation;
+            $data->meal = $request->meal;
             $data->route = $request->route;
             $data->trip_highlight = $request->trip_highlight;
             $data->peak_name = $request->peak_name;

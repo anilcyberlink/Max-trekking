@@ -48,150 +48,46 @@
                                 <div class="uk-dropbar uk-dropbar-top" uk-drop="offset: 5; boundary:!.uk-navbar-lenght; stretch: x; flip: false; animation: reveal-top; delay-hide: 100; duration: 700;">
                                     <div class="uk-container ">
                                         <ul class="uk-flex-center uk-travel-tabs" data-uk-tab="{connect:'.uk-switcher'}">
-                                            <li><a href="#">8000ERS</a></li>
-                                            <li><a href="#">7000ERS</a></li>
-                                            <!-- <li class="uk-active"><a href="#">5000ERS</a></li>
-                                            <li class="uk-active"><a href="#">6000ERS</a></li> -->
+                                            @foreach($expeditions as $row)
+                                                @if(trip_byDestinations($row->id)->count()>0)
+                                                    <li><a href="#">{{ $row->title }}</a></li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                         <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
-                                            <div>
-                                                <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider="sets: true; finite: true;">
-                                                    <ul class="uk-slider-items uk-child-width-1-3@m uk-grid-small" uk-grid>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain1.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
+                                            @foreach($expeditions as $row)
+                                                @if (trip_byDestinations($row->id)->count() > 0)
+                                                    <div>
+                                                        <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider="sets: true; finite: true;">
+                                                            <ul class="uk-slider-items uk-child-width-1-3@m uk-grid-small" uk-grid>
+                                                                @foreach (trip_byDestinations($row->id) as $_keyEx => $_rowEx)
+                                                                    <li>
+                                                                        <div>
+                                                                            <div class="uk-megamenu-sub-menu">
+                                                                                <img src="{{ $_rowEx->thumbnail ? asset('uploads/original/'.$_rowEx->thumbnail) : asset('themes-assets/img/mountain/mountain1.jpeg')}}" class="image" alt="{{$_rowEx->trip_title}}">
+                                                                                <a href="{{ url('page/' . tripurl($_rowEx->uri)) }}">
+                                                                                    <div class="overlay">
+                                                                                        <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
+                                                                                            {{$_rowEx->trip_title}}
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                    </a>
-                                                                </div>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
+                                                                <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
+                                                                <a href="{{ route('page.destinationlist', $row->uri) }}" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
+                                                                    <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
+                                                                </a>
+                                                                <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
                                                             </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain2.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain3.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain4.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                        <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-                                                        <a href="list.php" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
-                                                            <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
-                                                        </a>
-                                                        <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider="sets: true; finite: true;">
-                                                    <ul class="uk-slider-items uk-child-width-1-3@m uk-grid-small" uk-grid>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-1.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-2.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-3.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-4.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                        <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-                                                        <a href="list.php" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
-                                                            <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
-                                                        </a>
-                                                        <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -201,151 +97,46 @@
                                 <div class="uk-dropbar uk-dropbar-top" uk-drop="offset: 5; boundary:!.uk-navbar-lenght; stretch: x; flip: false; animation: reveal-top; delay-hide: 100; duration: 700;">
                                     <div class="uk-container ">
                                         <ul class="uk-flex-center uk-travel-tabs" data-uk-tab="{connect:'.uk-switcher'}">
-                                            <li><a href="#">Everest</a></li>
-                                            <li><a href="#">Makalu</a></li>
-                                            <li><a href="#">Langtang</a></li>
-                                            <li><a href="#">Manaslu</a></li>
-
+                                            @foreach($regions as $row)
+                                                @if (tripbyregions($row->id)->count() > 0)
+                                                    <li><a href="#">{{$row->title}}</a></li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                         <div class="uk-switcher uk-width-expand@m uk-padding-menu ">
-                                            <div>
-                                                <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider="sets: true; finite: true;">
-                                                    <ul class="uk-slider-items uk-child-width-1-3@m uk-grid-small" uk-grid>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain1.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
+                                            @foreach ($regions as $row)
+                                                <div>
+                                                    @if(tripbyregions($row->id)->count() > 0)
+                                                        <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider="sets: true; finite: true;">
+                                                            <ul class="uk-slider-items uk-child-width-1-3@m uk-grid-small" uk-grid>
+                                                                @foreach (tripbyregions($row->id) as $_keyEx => $_rowEx)
+                                                                    <li>
+                                                                        <div>
+                                                                            <div class="uk-megamenu-sub-menu">
+                                                                                <img src="{{ $_rowEx->thumbnail ? asset('uploads/original/'.$_rowEx->thumbnail) : asset('themes-assets/img/mountain/mountain1.jpeg')}}" class="image" alt="{{ $_rowEx->trip_title }}">
+                                                                                <a href="{{ url('page/' . tripurl($_rowEx->uri)) }}">
+                                                                                    <div class="overlay">
+                                                                                        <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
+                                                                                            {{ $_rowEx->trip_title }}
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
-                                                                    </a>
-                                                                </div>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                            <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
+                                                                <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
+                                                                <a href="{{ route('page.regionlist', $row->uri) }}" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
+                                                                    <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
+                                                                </a>
+                                                                <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
                                                             </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain2.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain3.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain4.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                        <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-                                                        <a href="list.php" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
-                                                            <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
-                                                        </a>
-                                                        <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
-                                                    </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <div class="uk-position-relative uk-visible-toggle" tabindex="-1" uk-slider="sets: true; finite: true;">
-                                                    <ul class="uk-slider-items uk-child-width-1-3@m uk-grid-small" uk-grid>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-1.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-2.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-3.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Lobuche East
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div>
-                                                                <div class="uk-megamenu-sub-menu">
-                                                                    <img src="assets/img/mountain/mountain-4.jpeg" class="image" alt="">
-                                                                    <a href="detail.php">
-                                                                        <div class="overlay">
-                                                                            <h4 class="uk-margin-top uk-margin-remove-bottom text-white uk-position-bottom">
-                                                                                Island Peak
-                                                                            </h4>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                        <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
-                                                        <a href="list.php" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
-                                                            <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
-                                                        </a>
-                                                        <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -361,7 +152,6 @@
                                 </div>
                                 <div class="uk-btn-back">
                                     <i class="fa-solid fa-circle-arrow-right"></i>
-
                                 </div>
                             </a>
                         </div>
@@ -370,6 +160,7 @@
             </div>
         </nav>
         <!-- desktop view end -->
+
         <!-- mobile view start -->
         <div class="uk-header-mobile uk-hidden@l shadow-lg" uk-header="" style="position: absolute; width:100%; z-index: 1000;">
             <div class="uk-navbar-container uk-container">
@@ -377,7 +168,7 @@
                     <nav class="uk-navbar">
                         <div class="uk-navbar-left">
                             <a href="{{ url('/') }}" class=" uk-navbar-item">
-                                <img alt="" loading="eager" src="assets/img/logo.jpeg" width="100">
+                                <img alt="" loading="eager" src="{{ asset('themes-assets/img/logo.jpeg') }}" width="100">
                             </a>
                         </div>
                         <div class="uk-navbar-right">
@@ -388,7 +179,7 @@
                                     <div class="uk-offcanvas-header uk-flex uk-flex-center uk-flex-middle" style="background:#f8f8f8;">
                                         <div>
                                             <a class="uk-navbar-item uk-logo " href="{{ url('/') }}">
-                                                <img src="assets/img/logo.jpeg" alt="" width="120" class="uk-logo-white">
+                                                <img src="{{ asset('themes-assets/img/logo.jpeg') }}" alt="" width="120" class="uk-logo-white">
                                             </a>
                                         </div>
                                         <div>
@@ -401,34 +192,33 @@
                                             <li class="uk-parent">
                                                 <a href="#">Company<span uk-nav-parent-icon></span></a>
                                                 <ul class=" uk-padding-remove">
-                                                    <li><a href="about.php">About</a></li>
-                                                    <li><a href="whyus.php">Why Us</a></li>
-                                                    <li><a href="team.php">Team</a></li>
-                                                    <li><a href="faq.php">FAQ</a></li>
-                                                    <li><a href="document.php">Legal Document</a></li>
-                                                    <li><a href="info.php">Information</a></li>
+                                                    @foreach ($navigations as $row)
+                                                        <li><a href="{{ route('page.posttype_detail',$row->uri) }}">{{ $row->post_type}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                             <li class="uk-parent">
                                                 <a href="#">Expedition<span uk-nav-parent-icon></span></a>
                                                 <ul class=" uk-padding-remove">
-                                                    <li><a href="list.php">8000</a></li>
-                                                    <li><a href="list.php">7000</a></li>
-                                                    <li><a href="list.php">6000</a></li>
-                                                    <li><a href="list.php">5000</a></li>
+                                                    @foreach($expeditions as $row)
+                                                        @if(trip_byDestinations($row->id)->count()>0)
+                                                            <li><a href="{{ route('page.destinationlist', $row->uri) }}">{{ $row->title }}</a></li>
+                                                        @endif
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                             <li class="uk-parent">
                                                 <a href="#">Trekking<span uk-nav-parent-icon></span></a>
                                                 <ul class=" uk-padding-remove">
-                                                    <li><a href="list.php">Annapurna Region</a></li>
-                                                    <li><a href="list.php">Everest Region</a></li>
-                                                    <li><a href="list.php">Makalu Region</a></li>
-                                                    <li><a href="list.php">Langtang Region</a></li>
+                                                    @foreach($regions as $row)
+                                                        @if (tripbyregions($row->id)->count() > 0)
+                                                            <li><a href="{{ route('page.regionlist', $row->uri) }}">{{ $row->title }} </a></li>
+                                                        @endif
+                                                    @endforeach
                                                 </ul>
                                             </li>
-                                            <li><a href="blog.php">News / Blogs</a></li>
-                                            <li><a href="contact.php">Contact</a></li>
+                                            <li><a href="{{ route('page.posttype_detail',$blogs->uri) }}">{{ $blogs->post_type }}</a></li>
+                                            <li><a href="{{ route('page.posttype_detail',$contact->uri) }}">{{ $contact->post_type }}</a></li>
                                         </ul>
                                     </div>
                                     <div class="uk-offcanvas-footer uk-padding-small uk-padding-remove-top">
@@ -441,7 +231,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

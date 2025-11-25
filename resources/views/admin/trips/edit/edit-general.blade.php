@@ -15,6 +15,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <input type="text" id="sub_title" name="sub_title" class="form-control"
+                                value="{{ $data->sub_title }}" placeholder="Trip Sub Title" />
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -30,7 +38,7 @@
                             <label>Trip Difficulty</label>
                             @if ($trek->count() > 0)
                                 <select class="form-control" name="trip_grade">
-                                    <option value="0"> Select Grade </option>
+                                    <option value="0" selected disabled> Select Grade </option>
                                     @foreach ($trek as $row)
                                         <option value="{{ $row->id }}"
                                             {{ $row->id == $data->trip_grade ? 'selected' : '' }}>{{ $row->trip_grade }}
@@ -47,7 +55,7 @@
                             <!-- <input type="text" name="best_season" class="form-control"
                                 value="{{ $data->best_season }}" /> -->
                             <select name="best_season" id="best_season" class="form-control">
-                                <option value="">Select season</option>
+                                <option value="" selected disabled>Select season</option>
                                <option value="Spring" {{($data->best_season == 'Spring')?'selected':''}}>Spring</option>
                                <option value="Summmer" {{($data->best_season == 'Summer')?'selected':''}}>Summer</option>
                                <option value="Monsoon" {{($data->best_season == 'Monsoon')?'selected':''}}>Monsoon</option>
@@ -75,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="form-group">
+                <div class="form-group">
                     <div class="col-lg-6">
                         <div class="bs-component">
                             <label>Accommodation</label>
@@ -85,6 +93,13 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="bs-component">
+                            <label>Meals</label>
+                            <input type="text" name="meal" class="form-control"
+                                value="{{ $data->meal }}" />
+                        </div>
+                    </div>
+                    {{--   <div class="col-lg-6">
+                        <div class="bs-component">
                             <label>Country</label>
                             <!--<input type="text" name="peak_name" class="form-control" value="{{ $data->peak_name }}"-->
                             <!--    placeholder="Staff" />-->
@@ -92,9 +107,9 @@
                                @include('themes.default.common.country')
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
 
-                </div> --}}
+                </div>
 
                 <div class="form-group">
                     <div class="col-lg-6">
@@ -102,6 +117,12 @@
                             <label>Total Price</label>
                             <input type="text" name="starting_price" class="form-control"
                                 value="{{ $data->starting_price }}" placeholder="$" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                        <label>Route</label>
+                            <input type="text" name="route" class="form-control" value="{{ $data->route }}" placeholder=""/>
                         </div>
                     </div>
                     <!-- <div class="col-lg-6">
@@ -115,7 +136,7 @@
                 <div class="form-group">
                     <div class="col-lg-6">
                         <div class="bs-component">
-                            <label>Start/End</label>
+                            <label>Activity</label>
                             <input type="text" name="walking_per_day" class="form-control"
                                 value="{{ $data->walking_per_day }}" />
                         </div>
@@ -322,7 +343,7 @@
 
             <div class="{{($trip_type_id == 2) ? '': 'onchange'}} 2">
                 <div class="sid_bvijay mb10">
-                    <h4> Destinations </h4>
+                    <h4> Expeditions </h4>
                     <div class="hd_show_con">
                         <div class="tab-content mb15">
                             <div id="tab1" class="tab-pane active">

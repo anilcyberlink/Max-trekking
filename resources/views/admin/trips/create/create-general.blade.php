@@ -14,6 +14,12 @@
                             <input type="hidden" id="uri" name="uri" value="" />
                         </div>
                     </div>
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <input type="text" id="sub_title" name="sub_title" class="form-control"
+                                placeholder="Trip Sub Title" value="{{ old('sub_title') }}" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -27,8 +33,8 @@
                         <div class="bs-component">
                             <label>Trip Difficulty</label>
                             @if ($trek->count() > 0)
-                                <select class="form-control" name="trip_grade">
-                                    <option value=""> Select Grade </option>
+                                <select class="form-control" name="trip_grade" >
+                                    <option value="" selected disabled> Select Grade </option>
                                     @foreach ($trek as $row)
                                         <option value="{{ $row->id }}">{{ $row->trip_grade }} </option>
                                     @endforeach
@@ -41,12 +47,12 @@
                             <label>Best Season</label>
                             <!-- <input type="text" name="best_season" class="form-control" value="{{ old('best_season') }}" /> -->
                             <select name="best_season" id="best_season" class="form-control">
-                                <option value="">Select season</option>
-                               <option value="Spring">Spring</option>
-                               <option value="Summmer">Summer</option>
-                               <option value="Monsoon">Monsoon</option>
-                               <option value="Autumn">Autumn</option>
-                               <option value="Winter">Winter</option>
+                                <option value="" selected disabled>Select season</option>
+                                <option value="Spring">Spring</option>
+                                <option value="Summmer">Summer</option>
+                                <option value="Monsoon">Monsoon</option>
+                                <option value="Autumn">Autumn</option>
+                                <option value="Winter">Winter</option>
                             </select>
                         </div>
                     </div>
@@ -69,13 +75,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <!-- <div class="col-lg-6">
+                    <div class="col-lg-6">
                         <div class="bs-component">
                             <label>Accommodation</label>
                             <input type="text" name="accommodation" class="form-control"
                                 value="{{ old('accommodation') }}" />
                         </div>
-                    </div> -->
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Meals</label>
+                            <input type="text" name="meal" class="form-control"
+                                value="{{ old('meal') }}" />
+                        </div>
+                    </div>
                     {{-- <div class="col-lg-6">
                         <div class="bs-component">
                         <label>Country</label>
@@ -102,17 +115,17 @@
                                 value="{{ old('start-date') }}" />
                         </div>
                     </div> -->
-                    <!-- <div class="col-lg-6">
+                    <div class="col-lg-6">
                         <div class="bs-component">
-                        <label>Deposit Payable Now</label>
-                            <input type="number" min="1" name="route" class="form-control" value="{{ old('route') }}" placeholder="$"/>
+                        <label>Route</label>
+                            <input type="text" name="route" class="form-control" value="{{ old('route') }}" placeholder=""/>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
                  <div class="form-group">
                     <div class="col-lg-6">
                         <div class="bs-component">
-                            <label>Start/End</label>
+                            <label>Activity</label>
                             <input type="text" name="walking_per_day" class="form-control" value="{{ old('walking_per_day') }}" />
                         </div>
                     </div>
@@ -285,7 +298,7 @@
             </div>
             
         <div class="sid_bvijay mb10 onchange 2">
-            <h4> Destinations </h4>
+            <h4> Expeditions </h4>
             <div class="hd_show_con">
                 <div class="tab-content mb15">
                     <div id="tab1" class="tab-pane active">

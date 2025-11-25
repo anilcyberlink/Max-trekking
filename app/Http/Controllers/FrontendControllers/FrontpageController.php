@@ -134,7 +134,7 @@ class FrontpageController extends Controller
             $data_child_associated_post[$row->id] = $associated_posts;
             $data_child_images = PostImageModel::where('post_id',$row['id'])->get();
         }
-
+        // dd($data);
         return view('themes.default.' . $data['template'] . '', compact('data','data_child','related','associated_posts', 'trip_review','team','local','post_type','terms_policy','data_child_associated_post','data_child_images'));
     }
 
@@ -186,7 +186,7 @@ class FrontpageController extends Controller
         $data->save();
         }
         $similar_trips=$data->relatedtrips()->orderBy('ordering', 'asc')->get();
-       
+    //    dd($data);
         return view('themes.default.tripdetail', compact('data','contact_us_post_info','schedules','cost_includes', 'cost_excludes', 'itinerary',
             'photo_videos', 'similar_trips','photos','videos','trip_docs','gear_insurance','gear_payment','guide'));
     }

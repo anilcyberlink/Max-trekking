@@ -342,8 +342,8 @@
          </div>
          <div class="uk-width-1-2@m">
             <div uk-lightbox>
-               <a class="uk-inline" href="assets/img/map.jpg" data-caption="Route Map">
-                  <img src="assets/img/map.jpg" width="1800" height="1200" alt="">
+               <a class="uk-inline" href="{{asset('themes-assets/img/map.jpg')}}" data-caption="Route Map">
+                  <img src="{{asset('themes-assets/img/map.jpg')}}" width="1800" height="1200" alt="">
                </a>
             </div>
          </div>
@@ -367,31 +367,31 @@
          <div class="uk-gallery ">
             <ul class="uk-grid-collapse uk-grid-small" uk-grid="masonry: true" uk-lightbox="animation: slide;">
                <li class="uk-width-1-1">
-                  <a href="assets/img/mountain1.jpg" data-caption="Everest Base Camp Trek">
+                  <a href="{{asset('themes-assets/img/mountain1.jpg')}}" data-caption="Everest Base Camp Trek">
                      <div class="uk-media-400 uk-list-shine">
-                        <img src="assets/img/mountain1.jpg" uk-img>
+                        <img src="{{asset('themes-assets/img/mountain1.jpg')}}" uk-img>
                      </div>
                   </a>
                </li>
                <li class=" uk-width-1-3@m uk-width-1-2">
-                  <a href="assets/img/about.jpeg" data-caption="Everest Base Camp Trek">
+                  <a href="{{asset('themes-assets/img/about.jpeg')}}" data-caption="Everest Base Camp Trek">
                      <div class="uk-media-220 uk-list-shine">
-                        <img src="assets/img/about.jpeg" uk-img>
+                        <img src="{{asset('themes-assets/img/about.jpeg')}}" uk-img>
                      </div>
                   </a>
                </li>
                <li class=" uk-width-1-3@m uk-width-1-2">
-                  <a href="assets/img/about.jpeg" data-caption="Everest Base Camp Trek">
+                  <a href="{{asset('themes-assets/img/about.jpeg')}}" data-caption="Everest Base Camp Trek">
                      <div class="uk-media-220 uk-list-shine">
-                        <img src="assets/img/about.jpeg" uk-img>
+                        <img src="{{asset('themes-assets/img/about.jpeg')}}" uk-img>
                      </div>
                   </a>
                </li>
 
                <li class=" uk-width-1-3@m uk-width-1-1">
-                  <a href="assets/img/about.jpeg" data-caption="Everest Base Camp Trek">
+                  <a href="{{asset('themes-assets/img/about.jpeg')}}" data-caption="Everest Base Camp Trek">
                      <div class="uk-media-220 uk-more-images  uk-list-shine">
-                        <img src="assets/img/about.jpeg" uk-img>
+                        <img src="{{asset('themes-assets/img/about.jpeg')}}" uk-img>
                         <span class="uk-h1 uk-position-center uk-light uk-margin-remove text-white "
                            style="z-index: 1;">+3</span>
                         <div class="uk-overlay-primary uk-position-cover"></div>
@@ -400,13 +400,13 @@
                </li>
                <!-- more images -->
                <li>
-                  <a href="assets/images/trip/07.jpg" data-caption="Everest Base Camp Trek"></a>
+                  <a href="{{asset('themes-assets/images/trip/07.jpg')}}" data-caption="Everest Base Camp Trek"></a>
                </li>
                <li>
-                  <a href="assets/images/trip/08.jpg" data-caption="Everest Base Camp Trek"></a>
+                  <a href="{{asset('themes-assets/images/trip/08.jpg')}}" data-caption="Everest Base Camp Trek"></a>
                </li>
                <li>
-                  <a href="assets/images/trip/09.jpg" data-caption="Everest Base Camp Trek"></a>
+                  <a href="{{asset('themes-assets/images/trip/09.jpg')}}" data-caption="Everest Base Camp Trek"></a>
                </li>
                <!-- end -->
             </ul>
@@ -714,7 +714,7 @@
 
 <!-- review section start -->
 <section class="uk-section uk-position-relative uk-section  uk-background-norepeat 
-      uk-background-cover" uk-parallax="bgx: -200; easing: 2;" data-src="assets/img/review.png" uk-img id="review">
+      uk-background-cover" uk-parallax="bgx: -200; easing: 2;" data-src="{{asset('themes-assets/img/review.png')}}" uk-img id="review">
    <div class="uk-overlay-blue uk-position-cover "></div>
    <div class="uk-container-large uk-container uk-position-relative">
       <div class="uk-grid-collapse" uk-grid>
@@ -740,7 +740,7 @@
             <div class="mt-65">
                <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
                   <div>
-                     <img src="assets/img/04.png" alt="" class="uk-client-img" loading="lazy">
+                     <img src="{{asset('themes-assets/img/04.png')}}" alt="" class="uk-client-img" loading="lazy">
                   </div>
                   <div class="uk-margin-small-top">
                      <div class="uk-flex uk-flex-between uk-flex-middle">
@@ -770,7 +770,7 @@
             <div class="mt-65">
                <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
                   <div>
-                     <img src="assets/img/01.png" alt="" class="uk-client-img" loading="lazy">
+                     <img src="{{asset('themes-assets/img/01.png')}}" alt="" class="uk-client-img" loading="lazy">
                   </div>
                   <div class="uk-margin-small-top">
                      <div class="uk-flex uk-flex-between uk-flex-middle">
@@ -800,7 +800,7 @@
             <div class="mt-65">
                <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
                   <div>
-                     <img src="assets/img/02.png" alt="" class="uk-client-img" loading="lazy">
+                     <img src="{{asset('themes-assets/img/02.png')}}" alt="" class="uk-client-img" loading="lazy">
                   </div>
                   <div class="uk-margin-small-top">
                      <div class="uk-flex uk-flex-between uk-flex-middle">
@@ -830,7 +830,7 @@
             <div class="mt-65">
                <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
                   <div>
-                     <img src="assets/img/03.png" alt="" class="uk-client-img" loading="lazy">
+                     <img src="{{asset('themes-assets/img/03.pn')}}g" alt="" class="uk-client-img" loading="lazy">
                   </div>
                   <div class="uk-margin-small-top">
                      <div class="uk-flex uk-flex-between uk-flex-middle">
@@ -884,7 +884,7 @@
             <div class="uk-travel-card bg-light-grey">
                <div>
                   <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="assets/img/about.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque"
+                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
                         loading="lazy" height="500" width="500" alt="">
                   </a>
                </div>
@@ -916,7 +916,7 @@
             <div class="uk-travel-card bg-light-grey">
                <div>
                   <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="assets/img/about.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque"
+                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
                         loading="lazy" height="500" width="500" alt="">
                   </a>
                </div>
@@ -948,7 +948,7 @@
             <div class="uk-travel-card bg-light-grey">
                <div>
                   <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="assets/img/about.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque"
+                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
                         loading="lazy" height="500" width="500" alt="">
                   </a>
                </div>
@@ -980,7 +980,7 @@
             <div class="uk-travel-card bg-light-grey">
                <div>
                   <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="assets/img/about.jpeg" class="border-rounded uk-transition-scale-up uk-transition-opaque"
+                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
                         loading="lazy" height="500" width="500" alt="">
                   </a>
                </div>

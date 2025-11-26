@@ -110,7 +110,7 @@
                         </div>
                         <div>
                            <div>
-                              <p class="uk-margin-remove"><b>Difficulty</b></p>
+                              <p class="uk-margin-remove"><b>Difficulty </b></p>
                               <p class="text-secondary uk-margin-remove">{{ $data->get_trip_grade_data->trip_grade }}</p>
                            </div>
                         </div>

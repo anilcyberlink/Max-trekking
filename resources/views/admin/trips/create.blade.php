@@ -78,6 +78,7 @@
         /******** For Itinerary *******/
         jQuery(document).delegate('a.add-itinerary', 'click', function(e) {
             e.preventDefault();
+            jQuery('#Itinerary-headingg').hide();
             var content = jQuery('#row_additional .row'),
                 size = jQuery('#row_body >.row').length + 1,
                 element = null,

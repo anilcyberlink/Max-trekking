@@ -240,24 +240,7 @@
                <span class="section-tag uk-text-uppercase">Overview <i
                      class="fa-solid fa-plane uk-margin-small-left"></i></span>
                <p class="uk-text-justify">
-                  Dreaming of conquering the world's highest peak? The <b class="text-secondary">Everest expedition
-                     awaits,</b> a chance to stand on the roof of the world. <br><br>
-                  At 8,848 meters (29,029 ft), it's the crown jewel of the Himalayas, the highest point on Earth. But
-                  reaching the summit is no walk in the park. The Everest expedition is one of the most challenging
-                  adventures on the planet, pushing you to your physical and mental limits. Located in the Khumbu region
-                  on the border with Tibet, Everest offers a once-in-a-lifetime opportunity to experience breathtaking
-                  beauty and unparalleled challenge. <br> <br>
-                  <b class="text-secondary">Don't settle for anything less.</b> Everest is an experience of a lifetime,
-                  and the right expedition company can make all the difference. <br><br>
-                  During the Everest Expeditions, we provide you with a full package. Our Everest climbing guides are
-                  highly qualified and skilled, regularly reviewed and re-trained, and recognized for their training and
-                  experience throughout the profession. Only the most experienced guides and staff are deputed in this
-                  expedition as we place a great deal of emphasis on safety and accident prevention for both clients and
-                  guides on our expeditions. Our safety protocols reduce the risk as much as possible. Additionally, we
-                  would like to emphasize that our guides and staff are all employed according to ethical standards.
-                  Everest Expedition with Max is a combination of the hands and collaborative efforts of experienced
-                  Sherpas and the right equipment management, high altitude gear, and properly managed evacuation plans
-                  during an emergency.
+                  {!! $data->trip_content !!}
                </p>
             </div>
             <!-- overview end -->
@@ -266,18 +249,8 @@
                <span class="section-tag uk-text-uppercase">Best time for expedition <i
                      class="fa-solid fa-plane uk-margin-small-left"></i></span>
                <p>
-                  Spring (April-May) offers the most favorable conditions for your expedition. Here's why:
+                  {!! $data->trip_excerpt !!}
                </p>
-               <ul class="uk-best-ul">
-                  <li><b>Calmer winds:</b> Reduced wind speeds make climbing safer and more manageable.</li>
-                  <li><b>Sunny days:</b> Enjoy clear skies and breathtaking Himalayan vistas throughout your trek</li>
-                  <li><b>Milder temperatures:</b> Spring offers a reprieve from the harsh winter cold, making the
-                     journey more .</li>
-                  <li><b>Vivid landscapes:</b> Lush green forests, cascading rivers, and vibrant birdlife create a
-                     stunning.</li>
-                  <li><b>Uninterrupted mountain views:</b> Spring's clear skies ensure you won't miss a single moment of
-                     the majestic Himalayas.</li>
-               </ul>
             </div>
             <!-- best time end -->
 
@@ -328,22 +301,13 @@
                   class="fa-solid fa-plane uk-margin-small-left"></i></span>
             <h2 class="text-primary fw-600 hb-bottom uk-margin-small-top">Route You Will See On The Trip</h2>
             <p class="uk-text-justify">
-               The journey begins at Everest Base Camp (18,000 ft.), a bustling hub at the foot of the Khumbu Glacier.
-               Here, climbers gather and they prepare for the challenging expedition .Beyond Base Camp, the terrain
-               becomes increasingly treacherous. Seracs (towers of ice), crevasses, and house-sized chunks of ice demand
-               careful navigation. <br><br>
-               <b class="text-secondary">Camp 1 (20,000 ft.)</b> offers a brief respite with its flat area and
-               sun-warmed ambiance, but the nights are filled with the unsettling sound of groaning crevasses beneath
-               the tents.<br>
-               <b class="text-secondary">Camp 2 (21,000 ft.)</b> offers a brief respite with its flat area and
-               sun-warmed ambiance, but the nights are filled with the unsettling sound of groaning crevasses beneath
-               the tents.<br>
+               {!! $data->trip_highlight !!}
             </p>
          </div>
          <div class="uk-width-1-2@m">
             <div uk-lightbox>
-               <a class="uk-inline" href="{{asset('themes-assets/img/map.jpg')}}" data-caption="Route Map">
-                  <img src="{{asset('themes-assets/img/map.jpg')}}" width="1800" height="1200" alt="">
+               <a class="uk-inline" href="{{ $data->trip_map ? asset('uploads/original/'.$data->trip_map) : asset('themes-assets/img/map.jpg')}}" data-caption="{{ $data->trip_title }}">
+                  <img src="{{$data->trip_map ? asset('uploads/original/'.$data->trip_map) : asset('themes-assets/img/map.jpg')}}" width="1800" height="1200" alt="{{ $data->trip_title }}">
                </a>
             </div>
          </div>
@@ -352,7 +316,10 @@
    </div>
 </section>
 <!-- route section end -->
-
+@php
+   $visibleCount = 4;
+   $totalPhotos = count($photos);
+@endphp
 <!-- gallery section start -->
 <section class="uk-section" id="photo">
    <div class="uk-container">
@@ -366,49 +333,37 @@
       <div>
          <div class="uk-gallery ">
             <ul class="uk-grid-collapse uk-grid-small" uk-grid="masonry: true" uk-lightbox="animation: slide;">
-               <li class="uk-width-1-1">
-                  <a href="{{asset('themes-assets/img/mountain1.jpg')}}" data-caption="Everest Base Camp Trek">
-                     <div class="uk-media-400 uk-list-shine">
-                        <img src="{{asset('themes-assets/img/mountain1.jpg')}}" uk-img>
-                     </div>
-                  </a>
-               </li>
-               <li class=" uk-width-1-3@m uk-width-1-2">
-                  <a href="{{asset('themes-assets/img/about.jpeg')}}" data-caption="Everest Base Camp Trek">
-                     <div class="uk-media-220 uk-list-shine">
-                        <img src="{{asset('themes-assets/img/about.jpeg')}}" uk-img>
-                     </div>
-                  </a>
-               </li>
-               <li class=" uk-width-1-3@m uk-width-1-2">
-                  <a href="{{asset('themes-assets/img/about.jpeg')}}" data-caption="Everest Base Camp Trek">
-                     <div class="uk-media-220 uk-list-shine">
-                        <img src="{{asset('themes-assets/img/about.jpeg')}}" uk-img>
-                     </div>
-                  </a>
-               </li>
+               @foreach ($photos->take($visibleCount) as $index => $photo)
+                  @if($loop->first)
+                     <li class="uk-width-1-1">
+                        <a href="{{ $photo->thumbnail ? asset('uploads/original/'.$photo->thumbnail) : asset('themes-assets/img/mountain1.jpg')}}" data-caption="{{ $photo->title }}">
+                           <div class="uk-media-400 uk-list-shine">
+                              <img src="{{$photo->thumbnail ? asset('uploads/original/'.$photo->thumbnail) : asset('themes-assets/img/mountain1.jpg')}}" uk-img>
+                           </div>
+                        </a>
+                     </li>
+                  @else
+                     <li class=" uk-width-1-3@m uk-width-1-2">
+                        <a href="{{$photo->thumbnail ? asset('uploads/original/'.$photo->thumbnail) : asset('themes-assets/img/about.jpeg')}}" data-caption="{{ $photo->title }}">
+                           <div class="uk-media-220 uk-list-shine">
+                              <img src="{{ $photo->thumbnail ? asset('uploads/original/'.$photo->thumbnail) :asset('themes-assets/img/about.jpeg')}}" uk-img>
+                              @if ($index === $visibleCount - 1 && $totalPhotos > $visibleCount)
+                                 <span class="uk-h2 uk-position-center uk-light text-white" style="z-index: 2;">
+                                    +{{ $totalPhotos - $visibleCount }}
+                                 </span>
+                                 <div class="uk-overlay-primary uk-position-cover"></div>
+                              @endif
+                           </div>
+                        </a>
+                     </li>
+                  @endif
+               @endforeach
 
-               <li class=" uk-width-1-3@m uk-width-1-1">
-                  <a href="{{asset('themes-assets/img/about.jpeg')}}" data-caption="Everest Base Camp Trek">
-                     <div class="uk-media-220 uk-more-images  uk-list-shine">
-                        <img src="{{asset('themes-assets/img/about.jpeg')}}" uk-img>
-                        <span class="uk-h1 uk-position-center uk-light uk-margin-remove text-white "
-                           style="z-index: 1;">+3</span>
-                        <div class="uk-overlay-primary uk-position-cover"></div>
-                     </div>
-                  </a>
-               </li>
-               <!-- more images -->
-               <li>
-                  <a href="{{asset('themes-assets/images/trip/07.jpg')}}" data-caption="Everest Base Camp Trek"></a>
-               </li>
-               <li>
-                  <a href="{{asset('themes-assets/images/trip/08.jpg')}}" data-caption="Everest Base Camp Trek"></a>
-               </li>
-               <li>
-                  <a href="{{asset('themes-assets/images/trip/09.jpg')}}" data-caption="Everest Base Camp Trek"></a>
-               </li>
-               <!-- end -->
+               @foreach ($photos->skip($visibleCount) as $photo)
+                  <li>
+                     <a href="{{$photo->thumbnail ? asset('uploads/original/'.$photo->thumbnail) : asset('themes-assets/images/trip/07.jpg')}}" data-caption="{{ $photo->title }}"></a>
+                  </li>
+               @endforeach
             </ul>
          </div>
       </div>
@@ -446,54 +401,28 @@
                   </tr>
                </thead>
                <tbody>
-                  <tr class="bg-white">
-                     <td>
-                        <strong>50 Days</strong>
-                        <br> 2026-04-12-2026-05-31
-                     </td>
-                     <td class="uk-text-center@m">
-                        <span class="uk-text-success">Booking Open</span>
-                     </td>
-                     <td class="uk-text-center@m">
-                        <span class="uk-hidden@m"> Group Size </span> 1 - 2 PAX
-                     </td>
-                     <td class="uk-text-right@m" style="padding-bottom:18px;">
-                        <a class="uk-small-btn uk-small-btn-primary" href="#enquiry-form" uk-toggle>Inquire Now</a>
-                        <a class="uk-small-btn uk-small-btn-secondary" href="book.php">Book Now</a>
-                     </td>
-                  </tr>
-                  <tr class="bg-white">
-                     <td>
-                        <strong>50 Days</strong>
-                        <br> 2026-05-02-2026-05-12
-                     </td>
-                     <td class="uk-text-center@m">
-                        <span class="uk-text-danger">Booking Closed</span>
-                     </td>
-                     <td class="uk-text-center@m">
-                        <span class="uk-hidden@m"> Group Size </span> 1 - 2 PAX
-                     </td>
-                     <td class="uk-text-right@m" style="padding-bottom:18px;">
-                        <a class="uk-small-btn uk-small-btn-primary" href="#enquiry-form" uk-toggle="">Inquire Now</a>
-                        <a class="uk-small-btn uk-small-btn-secondary" href="book.php">Book Now</a>
-                     </td>
-                  </tr>
-                  <tr class="bg-white">
-                     <td>
-                        <strong>50 Days</strong>
-                        <br> 2026-04-12-2026-05-31
-                     </td>
-                     <td class="uk-text-center@m">
-                        <span class="uk-text-success">Booking Open</span>
-                     </td>
-                     <td class="uk-text-center@m">
-                        <span class="uk-hidden@m"> Group Size </span> 1 - 2 PAX
-                     </td>
-                     <td class="uk-text-right@m" style="padding-bottom:18px;">
-                        <a class="uk-small-btn uk-small-btn-primary" href="#enquiry-form" uk-toggle="">Inquire Now</a>
-                        <a class="uk-small-btn uk-small-btn-secondary" href="book.php">Book Now</a>
-                     </td>
-                  </tr>
+                  @foreach ($schedules as $row )
+                     <tr class="bg-white">
+                        <td>
+                           <strong>{{ $row->group_size }} Days</strong>
+                           <br> {{ \Carbon\Carbon::parse($row->start_date)->format('Y/m/d') }} - {{ \Carbon\Carbon::parse($row->end_date)->format('Y/m/d') }}
+                        </td>
+                        <td class="uk-text-center@m">
+                           @if ($row->availability == 'available')
+                              <span class="uk-text-success">Booking Open</span>
+                           @else
+                              <span class="uk-text-danger">Booking Closed</span>
+                           @endif
+                        </td>
+                        <td class="uk-text-center@m">
+                           <span class="uk-hidden@m"></span> {!!  $row->remarks !!}
+                        </td>
+                        <td class="uk-text-right@m" style="padding-bottom:18px;">
+                           <a class="uk-small-btn uk-small-btn-primary" href="#enquiry-form" uk-toggle>Inquire Now</a>
+                           <a class="uk-small-btn uk-small-btn-secondary" href="book.php">Book Now</a>
+                        </td>
+                     </tr>
+                  @endforeach
                </tbody>
             </table>
          </div>
@@ -514,119 +443,33 @@
       </div>
       <div>
          <ul class="uk-padding uk-padding-remove-top uk-light uk-no-padding" uk-accordion="multiple: true">
-            <li class="itinerary-wrapper">
-               <a class="uk-accordion-title" href="#">
-                  <div class="itinerary-day">
-                     <div class="day-circle">Day 1</div>
-                     <div class="itinerary-content">
-                        <h4 class="text-white uk-margin-remove"><span class="day-tag">Day 1</span>Arrival In Kathmandu
-                        </h4>
-                        <div class="itinerary-info">
-                           <div class="text-white"><b class="text-secondary">Meals:</b> BLD</div>
-                           <div class="text-white"><b class="text-secondary">Accommodation:</b> Lodge</div>
+            @foreach($itinerary as $row)
+               <li class="itinerary-wrapper">
+                  <a class="uk-accordion-title" href="#">
+                     <div class="itinerary-day">
+                        <div class="day-circle">Day {{$row->days}}</div>
+                        <div class="itinerary-content">
+                           <h4 class="text-white uk-margin-remove"><span class="day-tag"></span>{{$row->title}}
+                           </h4>
+                           <div class="itinerary-info">
+                              <div class="text-white"><b class="text-secondary">Meals:</b> {{$row->meals}}</div>
+                              <div class="text-white"><b class="text-secondary">Accommodation:</b> {{$row->accommodation}}</div>
+                           </div>
+                        </div>
+                     </div>
+                  </a>
+                  <div class="uk-accordion-content ">
+                     <div class="itinerary-day">
+                        <div class="day-circle" style="visibility: hidden;"></div>
+                        <div class="itinerary-text">
+                           <p>
+                              {!! $row->content !!}
+                           </p>
                         </div>
                      </div>
                   </div>
-               </a>
-               <div class="uk-accordion-content ">
-                  <div class="itinerary-day">
-                     <div class="day-circle" style="visibility: hidden;">Day 1</div>
-                     <div class="itinerary-text">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi, earum, sit delectus
-                           laudantium quas tempora officia quisquam amet nesciunt repudiandae illum ab perferendis.
-                           Assumenda repellat tempora iusto dolores. Totam, quia.Lorem, ipsum dolor sit amet consectetur
-                           adipisicing elit. Sequi, earum, sit delectus laudantium quas tempora officia quisquam amet
-                           nesciunt repudiandae illum ab perferendis. Assumenda repellat tempora iusto dolores. Totam,
-                           quia.</p>
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li class="itinerary-wrapper">
-               <a class="uk-accordion-title" href="#">
-                  <div class="itinerary-day">
-                     <div class="day-circle">Day 2</div>
-                     <div class="itinerary-content">
-                        <h4 class="text-white uk-margin-remove"><span class="day-tag">Day 2</span>Trek to Dobhan (1070m)
-                           – 7 Hrs Trek</h4>
-                        <div class="itinerary-info">
-                           <div class="text-white"><b class="text-secondary">Meals:</b> BLD</div>
-                           <div class="text-white"><b class="text-secondary">Accommodation:</b> Lodge</div>
-                        </div>
-                     </div>
-                  </div>
-               </a>
-               <div class="uk-accordion-content ">
-                  <div class="itinerary-day">
-                     <div class="day-circle" style="visibility: hidden;">Day 2</div>
-                     <div class="itinerary-text">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi, earum, sit delectus
-                           laudantium quas tempora officia quisquam amet nesciunt repudiandae illum ab perferendis.
-                           Assumenda repellat tempora iusto dolores. Totam, quia.Lorem, ipsum dolor sit amet consectetur
-                           adipisicing elit. Sequi, earum, sit delectus laudantium quas tempora officia quisquam amet
-                           nesciunt repudiandae illum ab perferendis. Assumenda repellat tempora iusto dolores. Totam,
-                           quia.</p>
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li class="itinerary-wrapper">
-               <a class="uk-accordion-title" href="#">
-                  <div class="itinerary-day">
-                     <div class="day-circle">Day 3</div>
-                     <div class="itinerary-content">
-                        <h4 class="text-white uk-margin-remove"><span class="day-tag">Day 3</span>Trek to Punggen
-                           Monastery (4050m) – Samagaon (3520m) – 8hrs Trek</h4>
-                        <div class="itinerary-info">
-                           <div class="text-white"><b class="text-secondary">Meals:</b> BLD</div>
-                           <div class="text-white"><b class="text-secondary">Accommodation:</b> Lodge</div>
-                        </div>
-                     </div>
-                  </div>
-               </a>
-               <div class="uk-accordion-content ">
-                  <div class="itinerary-day">
-                     <div class="day-circle" style="visibility: hidden;">Day 3</div>
-                     <div class="itinerary-text">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi, earum, sit delectus
-                           laudantium quas tempora officia quisquam amet nesciunt repudiandae illum ab perferendis.
-                           Assumenda repellat tempora iusto dolores. Totam, quia.Lorem, ipsum dolor sit amet consectetur
-                           adipisicing elit. Sequi, earum, sit delectus laudantium quas tempora officia quisquam amet
-                           nesciunt repudiandae illum ab perferendis. Assumenda repellat tempora iusto dolores. Totam,
-                           quia.</p>
-                     </div>
-                  </div>
-               </div>
-            </li>
-            <li class="itinerary-wrapper">
-               <a class="uk-accordion-title" href="#">
-                  <div class="itinerary-day">
-                     <div class="day-circle">Day 4</div>
-                     <div class="itinerary-content">
-                        <h4 class="text-white uk-margin-remove"><span class="day-tag">Day 4</span>Trek to Dharapani
-                           (1963m), Drive to Besisahar and Then to Kathmandu</h4>
-                        <div class="itinerary-info">
-                           <div class="text-white"><b class="text-secondary">Meals:</b> BLD</div>
-                           <div class="text-white"><b class="text-secondary">Accommodation:</b> Lodge</div>
-                        </div>
-                     </div>
-                  </div>
-               </a>
-               <div class="uk-accordion-content ">
-                  <div class="itinerary-day">
-                     <div class="day-circle" style="visibility: hidden;">Day 4</div>
-                     <div class="itinerary-text">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi, earum, sit delectus
-                           laudantium quas tempora officia quisquam amet nesciunt repudiandae illum ab perferendis.
-                           Assumenda repellat tempora iusto dolores. Totam, quia.Lorem, ipsum dolor sit amet consectetur
-                           adipisicing elit. Sequi, earum, sit delectus laudantium quas tempora officia quisquam amet
-                           nesciunt repudiandae illum ab perferendis. Assumenda repellat tempora iusto dolores. Totam,
-                           quia.</p>
-                     </div>
-                  </div>
-               </div>
-            </li>
-
+               </li>
+            @endforeach
          </ul>
       </div>
    </div>
@@ -641,22 +484,18 @@
             <span class="section-tag uk-text-uppercase">Cost includes <i
                   class="fa-solid fa-plane uk-margin-small-left"></i></span>
             <ul class="uk-include-ul">
-               <li>The diverse landscapes of the Manaslu Massif, a less-frequented region.</li>
-               <li>Optimal acclimatization with the ascent to Manaslu Base Camp, surrounded by stunning panoramas.</li>
-               <li>Trekking along the Budhi Gandaki River Gorge after a scenic trip from Kathmandu to Machha Khola.</li>
-               <li>Experience the striking contrast of landscapes on this trek, where narrow trails lead to wide
-                  pastures and lush green valley’s transition into glacial moraines</li>
+               @foreach ($cost_includes as $row)
+                  <li>{{ $row->title }}</li>
+               @endforeach
             </ul>
          </div>
          <div>
             <span class="section-tag uk-text-uppercase">Cost Excludes <i
                   class="fa-solid fa-plane uk-margin-small-left"></i></span>
             <ul class="uk-exclude-ul">
-               <li>The diverse landscapes of the Manaslu Massif, a less-frequented region.</li>
-               <li>Optimal acclimatization with the ascent to Manaslu Base Camp, surrounded by stunning panoramas.</li>
-               <li>Trekking along the Budhi Gandaki River Gorge after a scenic trip from Kathmandu to Machha Khola.</li>
-               <li>Experience the striking contrast of landscapes on this trek, where narrow trails lead to wide
-                  pastures and lush green valley’s transition into glacial moraines</li>
+               @foreach ($cost_excludes as $row)
+                  <li>{{ $row->title }}</li>
+               @endforeach
             </ul>
          </div>
       </div>
@@ -880,134 +719,39 @@
          </div>
       </div>
       <div class=" uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l uk-grid-small" uk-grid>
-         <div class="uk-margin-top">
-            <div class="uk-travel-card bg-light-grey">
-               <div>
-                  <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
-                        loading="lazy" height="500" width="500" alt="">
-                  </a>
-               </div>
-               <div class="uk-travel-text uk-grid-collapse uk-grid ">
-                  <div class="uk-width-2-3">
-                     <a href="#" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
-                  </div>
-                  <div class="uk-width-1-3  text-primary uk-text-right ">
-                     <i class="fa-solid fa-star text-secondary"></i> 4.0
-                  </div>
-               </div>
-               <div class="uk-travel-price uk-flex uk-flex-between">
+         @foreach($similar_trips as $trip)
+            <div class="uk-margin-top">
+               <div class="uk-travel-card bg-light-grey">
                   <div>
-                     <span>
-                        <b class="text-primary f-18">$1234</b>
-                     </span>
+                     <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                        <img src="{{ $trip->thumbnail ? asset('uploads/original/'.$trip->thumbnail) : asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="{{ $trip->trip_title }}">
+                     </a>
                   </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                  <div class="uk-travel-text uk-grid-collapse uk-grid ">
+                     <div class="uk-width-2-3">
+                        <a href="#" class="two-line">{{ $trip->trip_title }}</a>
+                     </div>
+                     <div class="uk-width-1-3  text-primary uk-text-right ">
+                        <i class="fa-solid fa-star text-secondary"></i> 4.0
+                     </div>
                   </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
-                     11-15 Days
+                  <div class="uk-travel-price uk-flex uk-flex-between">
+                     <div>
+                        <span>
+                           <b class="text-primary f-18">${{ $trip->starting_price }}</b>
+                        </span>
+                     </div>
+                     <div class="uk-flex uk-flex-middle">
+                        <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
+                     </div>
+                     <div class="uk-flex uk-flex-middle">
+                        <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
+                        {{ $trip->duration }} Days
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-         <div class="uk-margin-top">
-            <div class="uk-travel-card bg-light-grey">
-               <div>
-                  <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
-                        loading="lazy" height="500" width="500" alt="">
-                  </a>
-               </div>
-               <div class="uk-travel-text uk-grid-collapse uk-grid ">
-                  <div class="uk-width-2-3">
-                     <a href="#" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
-                  </div>
-                  <div class="uk-width-1-3  text-primary uk-text-right ">
-                     <i class="fa-solid fa-star text-secondary"></i> 4.0
-                  </div>
-               </div>
-               <div class="uk-travel-price uk-flex uk-flex-between">
-                  <div>
-                     <span>
-                        <b class="text-primary f-18">$1234</b>
-                     </span>
-                  </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
-                  </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
-                     11-15 Days
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="uk-margin-top">
-            <div class="uk-travel-card bg-light-grey">
-               <div>
-                  <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
-                        loading="lazy" height="500" width="500" alt="">
-                  </a>
-               </div>
-               <div class="uk-travel-text uk-grid-collapse uk-grid ">
-                  <div class="uk-width-2-3">
-                     <a href="#" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
-                  </div>
-                  <div class="uk-width-1-3  text-primary uk-text-right ">
-                     <i class="fa-solid fa-star text-secondary"></i> 4.0
-                  </div>
-               </div>
-               <div class="uk-travel-price uk-flex uk-flex-between">
-                  <div>
-                     <span>
-                        <b class="text-primary f-18">$1234</b>
-                     </span>
-                  </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
-                  </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
-                     11-15 Days
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="uk-margin-top">
-            <div class="uk-travel-card bg-light-grey">
-               <div>
-                  <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
-                     <img src="{{asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque"
-                        loading="lazy" height="500" width="500" alt="">
-                  </a>
-               </div>
-               <div class="uk-travel-text uk-grid-collapse uk-grid ">
-                  <div class="uk-width-2-3">
-                     <a href="#" class="two-line">Annapurna Base Camp Trek- 15 Days</a>
-                  </div>
-                  <div class="uk-width-1-3  text-primary uk-text-right ">
-                     <i class="fa-solid fa-star text-secondary"></i> 4.0
-                  </div>
-               </div>
-               <div class="uk-travel-price uk-flex uk-flex-between">
-                  <div>
-                     <span>
-                        <b class="text-primary f-18">$1234</b>
-                     </span>
-                  </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: location" class="uk-margin-small-right text-secondary"></span>Nepal
-                  </div>
-                  <div class="uk-flex uk-flex-middle">
-                     <span uk-icon="icon: calendar" class="uk-margin-small-right text-secondary"></span>
-                     11-15 Days
-                  </div>
-               </div>
-            </div>
-         </div>
+         @endforeach
       </div>
    </div>
 </section>

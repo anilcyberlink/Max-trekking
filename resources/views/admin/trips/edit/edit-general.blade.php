@@ -121,7 +121,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="bs-component">
-                        <label>Route</label>
+                        <label>Transportation</label>
                             <input type="text" name="route" class="form-control" value="{{ $data->route }}" placeholder=""/>
                         </div>
                     </div>
@@ -190,13 +190,13 @@
         </div>
         <div class="panel">
             <div class="panel-heading">
-                <span class="panel-title">Caption</span>
+                <span class="panel-title">Route Description</span>
             </div>
             <div class="panel-body">
                 <div class="form-group">
                     <div class="col-lg-12">
                         <div class="bs-component">
-                            <textarea class="form-control" name="trip_highlight" rows="6"
+                            <textarea class="form-control my-editor" name="trip_highlight" rows="6"
                                 placeholder="Trip Caption">{{ $data->trip_highlight }}</textarea>
                         </div>
                     </div>
@@ -204,20 +204,7 @@
             </div>
         </div>
 
-        {{-- <div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Trip Brief</span>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-lg-12">
-                        <div class="bs-component">
-                            <textarea class="my-editor form-control" name="trip_excerpt" rows="3" placeholder="Trip Brief">{{ $data->trip_excerpt }}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        
 
         <div class="panel">
             <div class="panel-heading">
@@ -234,8 +221,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Trip Brief</span>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <textarea class="my-editor form-control" name="trip_excerpt" rows="3" placeholder="Trip Brief">{{ $data->trip_excerpt }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        {{-- <div class="panel">
+        <div class="panel">
             <div class="panel-heading">
                 <span class="panel-title">Related Trips</span>
             </div>
@@ -262,7 +264,8 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
+
         <div class="panel">
             <div class="panel-heading">
                 <span class="panel-title"> Meta data </span>

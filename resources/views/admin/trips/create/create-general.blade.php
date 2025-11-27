@@ -117,7 +117,7 @@
                     </div> -->
                     <div class="col-lg-6">
                         <div class="bs-component">
-                        <label>Route</label>
+                        <label>Transportation</label>
                             <input type="text" name="route" class="form-control" value="{{ old('route') }}" placeholder=""/>
                         </div>
                     </div>
@@ -176,13 +176,13 @@
 
         <div class="panel">
             <div class="panel-heading">
-                <span class="panel-title">Caption</span>
+                <span class="panel-title">Route Description</span>
             </div>
             <div class="panel-body">
                 <div class="form-group">
                     <div class="col-lg-12">
                         <div class="bs-component">
-                            <textarea class="form-control" name="trip_highlight"
+                            <textarea class="form-control my-editor" name="trip_highlight"
                                 rows="6">{{ old('trip_highlight') }}</textarea>
                         </div>
                     </div>
@@ -190,20 +190,6 @@
             </div>
         </div>
 
-        {{--<div class="panel">
-            <div class="panel-heading">
-                <span class="panel-title">Trip Brief</span>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <div class="col-lg-12">
-                        <div class="bs-component">
-                            <textarea class="my-editor form-control" name="trip_excerpt" rows="3">{{ old('trip_excerpt') }}</textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
 
         <div class="panel">
             <div class="panel-heading">
@@ -214,6 +200,21 @@
                     <div class="col-lg-12">
                         <div class="bs-component">
                             <textarea class="form-control my-editor" name="trip_content" rows="9">{{ old('trip_content') }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="panel-title">Trip Brief</span>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-lg-12">
+                        <div class="bs-component">
+                            <textarea class="my-editor form-control" name="trip_excerpt" rows="3">{{ old('trip_excerpt') }}</textarea>
                         </div>
                     </div>
                 </div>

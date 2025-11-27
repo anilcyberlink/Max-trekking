@@ -185,8 +185,8 @@ class FrontpageController extends Controller
         $data->visiter = $visiter;
         $data->save();
         }
-        $similar_trips=$data->relatedtrips()->orderBy('ordering', 'asc')->get();
-    //    dd($data);
+        $similar_trips=$data->relatedtrips()->orderBy('ordering', 'asc')->take(4)->get();
+        // dd($data,$photos,$similar_trips);
         return view('themes.default.tripdetail', compact('data','contact_us_post_info','schedules','cost_includes', 'cost_excludes', 'itinerary',
             'photo_videos', 'similar_trips','photos','videos','trip_docs','gear_insurance','gear_payment','guide'));
     }

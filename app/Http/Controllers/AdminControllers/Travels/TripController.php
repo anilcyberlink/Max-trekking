@@ -216,6 +216,8 @@ class TripController extends Controller
                   $tripItinerary->ordering = $request->itinerary_ordering[$key];  
                   $tripItinerary->days = $request->itinerary_days[$key];
                   $tripItinerary->title = $request->itinerary_title[$key];
+                  $tripItinerary->meals = $request->itinerary_meals[$key];
+                  $tripItinerary->accommodation = $request->itinerary_accommodation[$key];
                   $tripItinerary->content = $request->itinerary_content[$key];          
                   $tripItinerary->save(); 
                   $sn_itinerary++;     
@@ -280,7 +282,7 @@ class TripController extends Controller
                         $tripSchedule->trip_detail_id = $last_id;
                         $tripSchedule->start_date = $request->schedule_start_date[$key];
                         $tripSchedule->end_date = $request->schedule_end_date[$key];
-                        // $tripSchedule->group_size = $request->schedule_group_size[$key];
+                        $tripSchedule->group_size = $request->schedule_group_size[$key];
                         $tripSchedule->availability = $request->schedule_availability[$key];
                         // $tripSchedule->price = $request->schedule_price[$key];
                         $tripSchedule->remarks = $request->schedule_remarks[$key];
@@ -599,7 +601,7 @@ class TripController extends Controller
                         $scheduleData->ordering = $request->schedule_ordering[$key];
                         $scheduleData->start_date = $request->schedule_start_date[$key];
                         $scheduleData->end_date = $request->schedule_end_date[$key];
-                        // $scheduleData->group_size = $request->schedule_group_size[$key];
+                        $scheduleData->group_size = $request->schedule_group_size[$key];
                         $scheduleData->availability = $request->schedule_availability[$key];
                         // $scheduleData->price = $request->schedule_price[$key];
                         $scheduleData->remarks = $request->schedule_remarks[$key];
@@ -611,7 +613,7 @@ class TripController extends Controller
                         $scheduleData->ordering = $request->schedule_ordering[$key];
                         $scheduleData->start_date = $request->schedule_start_date[$key];
                         $scheduleData->end_date = $request->schedule_end_date[$key];
-                        // $scheduleData->group_size = $request->schedule_group_size[$key];
+                        $scheduleData->group_size = $request->schedule_group_size[$key];
                         $scheduleData->availability = $request->schedule_availability[$key];
                         // $scheduleData->price = $request->schedule_price[$key];
                         $scheduleData->remarks = $request->schedule_remarks[$key];
@@ -638,6 +640,8 @@ class TripController extends Controller
                         $itineraryData->ordering = $request->itinerary_ordering[$key];
                         $itineraryData->days = $request->itinerary_days[$key];
                         $itineraryData->title = $request->itinerary_title[$key];
+                        $itineraryData->meals = $request->itinerary_meals[$key];
+                        $itineraryData->accommodation = $request->itinerary_accommodation[$key];
                         $itineraryData->content = $request->itinerary_content[$key];
                         $itineraryData->save();
                     } else if ($request->itinerary_id[$value] !== null && $request->itinerary_id[$value] !== "") {
@@ -647,6 +651,8 @@ class TripController extends Controller
                         $itineraryData->ordering = $request->itinerary_ordering[$key];
                         $itineraryData->days = $request->itinerary_days[$key];
                         $itineraryData->title = $request->itinerary_title[$key];
+                        $itineraryData->meals = $request->itinerary_meals[$key];
+                        $itineraryData->accommodation = $request->itinerary_accommodation[$key];
                         $itineraryData->content = $request->itinerary_content[$key];
                         $itineraryData->save();
                     }

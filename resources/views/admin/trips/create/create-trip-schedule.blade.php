@@ -13,8 +13,8 @@
             <div class="col-md-2"><label>Start Date</label></div>
             <div class="col-md-2"><label>End Date</label></div>
             <!--<div class="col-md-2"><label>With Meal Price</label></div>-->
-            <!--<div class="col-md-2"><label>Without Meal Price</label></div>-->
-            <div class="col-md-2"> <label>Availability</label></div>
+            <div class="col-md-2"><label>Days</label></div>
+            <div class="col-md-3"> <label>Availability</label></div>
             <div class="col-md-1"></div>
 
         </div>
@@ -46,23 +46,23 @@
                             placeholder="" /></div> --}}
 
                     <div class="col-md-12">
-                        <div class="col-md-2"><label>Ordering</label></div>
-                        <div class="col-md-3"><label>Start Date</label></div>
-                        <div class="col-md-3"><label>End Date</label></div>
+                        <div class="col-md-1"><label>Ordering</label></div>
+                        <div class="col-md-2"><label>Start Date</label></div>
+                        <div class="col-md-2"><label>End Date</label></div>
                         <!--<div class="col-md-2"><label>With Meal Price</label></div>-->
-                        <!--<div class="col-md-2"><label>Without Meal Price</label></div>-->
+                        <div class="col-md-2"><label>Days</label></div>
                         <div class="col-md-3"> <label>Availability</label></div>
                         <div class="col-md-1"></div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <input type="number" min="1" max="2000" name="schedule_ordering[]"
                         class="form-control" placeholder="" />
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input type="date" min="01-01-2025" max="31-12-2035" name="schedule_start_date[]"
                         class="form-control" placeholder="DD-MM-YY" />
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input type="date" min="01-01-2025" max="31-12-2036" name="schedule_end_date[]"
                         class="form-control" placeholder="DD-MM-YY" />
                     </div>
@@ -70,10 +70,10 @@
                     <!--    <input type="number" min="0" name="schedule_price[]" -->
                     <!--    class="form-control" placeholder="price with meal" />-->
                     <!--</div>-->
-                    <!--<div class="col-md-2">-->
-                    <!--    <input type="number" name="schedule_group_size[]"-->
-                    <!--    class="form-control" placeholder="price without meal" />-->
-                    <!--</div>-->
+                    <div class="col-md-2">
+                       <input type="number" name="schedule_group_size[]"
+                       class="form-control" placeholder="" />
+                    </div>
                     <div class="col-md-3">
                         <select name="schedule_availability[]" class="form-control">
                             <option value="available"> Available </option>

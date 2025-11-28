@@ -31,6 +31,7 @@
                 <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> COST EXCLUDES </a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> DATES</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> INFO</a></li>
                 </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -52,6 +53,9 @@
                         </div>
                         <div class="tab-pane" id="tab_6">
                            @include('admin.trips.edit.edit-trip-schedule') 
+                        </div>
+                        <div class="tab-pane" id="tab_7">
+                           @include('admin.trips.edit.edit-info') 
                         </div>
                     </div>
                     <!-- /.tab-content -->
@@ -142,6 +146,56 @@
   });
                         
         /******** End For Itinerary *******/
+        /******** For Useful Info *******/
+        jQuery(document).delegate('a.add-useful', 'click', function(e) {
+            e.preventDefault();
+            var content = jQuery('#row_useful_additional .row'),
+                size = jQuery('#row_useful_body >.row').length + 1,
+                element = null,
+                element = content.clone();
+            element.attr('id', 'useful-rec-' + size);
+            element.find('.delete-useful').attr('useful-data-id', size);
+            element.appendTo('#row_useful_body');
+            element.find('.sn').html(size);
+        });
+
+        jQuery(document).delegate('button.delete-useful', 'click', function(e) {
+            e.preventDefault();
+            var makeConfirm = confirm("Are you sure You want to delete");
+            if (makeConfirm == true) {
+                var id = jQuery(this).attr('useful-data-id');
+                var targetDiv = jQuery(this).attr('targetDiv');
+                
+                var csrf = $('meta[name="csrf-token"]').attr('content');
+                var rowid = jQuery(this).attr('useful-rowid');
+                var trip_id = '{{ $data->id }}';
+                var url = '{{ route('useful.destroy', ['id' => ':id', 'info_id' => ':info_id']) }}';
+                url = url.replace(':id', trip_id);
+                url = url.replace(':info_id', rowid);
+                if (rowid) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: url,
+                        data: {
+                            _token: csrf
+                        },
+                        success: function(data) {
+                            $('#useful-rec-' + rowid).remove();
+                        },
+                        error: function(data) {
+                            alert('Error occurred!');
+                        }
+                    });
+                }
+                //End for delete
+                jQuery('#useful-rec-' + id).remove();
+                return true;
+            } else {
+                return false;
+            }
+        });
+        /******** End For Useful info *******/
+        
         /******** For Schedule *******/
         jQuery(document).delegate('a.add-schedule', 'click', function(e) {
             e.preventDefault();

@@ -172,6 +172,7 @@ class FrontpageController extends Controller
         if ($data->id) {
         $itinerary = $data->itineraries()->orderBy('ordering', 'asc')->get();       
         $schedules = $data->schedules()->orderBy('ordering', 'asc')->get();
+        $usefulInfo = $data->useful_infos()->orderBy('ordering', 'asc')->get();
         $cost_includes = CostIncludesModel::where('trip_detail_id',$data->id)->orderBy('ordering', 'asc')->get();
         $cost_excludes = CostExcludesModel::where('trip_detail_id',$data->id)->orderBy('ordering', 'asc')->get();         
         $photo_videos = TripGearModel::where('trip_detail_id', $data->id)->orderBy('ordering', 'asc')->get();
@@ -186,9 +187,9 @@ class FrontpageController extends Controller
         $data->save();
         }
         $similar_trips=$data->relatedtrips()->orderBy('ordering', 'asc')->take(4)->get();
-        // dd($data,$photos,$similar_trips);
+        // dd($data,$photos,$usefulInfo);
         return view('themes.default.tripdetail', compact('data','contact_us_post_info','schedules','cost_includes', 'cost_excludes', 'itinerary',
-            'photo_videos', 'similar_trips','photos','videos','trip_docs','gear_insurance','gear_payment','guide'));
+            'photo_videos', 'similar_trips','photos','videos','trip_docs','gear_insurance','gear_payment','guide','usefulInfo'));
     }
 
     //<------------------------------------------Activity Frontend---------------------------------------------->

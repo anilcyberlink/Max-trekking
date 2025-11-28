@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminControllers\Travels;
 
+use App\Models\Travels\TripUsefulModel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Travels\TripModel;
@@ -291,6 +292,24 @@ class TripController extends Controller
                         $sn_schedule++;
                     }
                 }
+                // Insert into useful information
+                if (isset($request->useful_ordering)) {
+                    $useful_keys = array_keys($request->useful_ordering);
+                    $sn_useful = 1;
+                    $sn_useful_count = count($request->useful_ordering);
+                    foreach ($useful_keys as $key) {
+                        if ($key + 1 >= $sn_useful_count) {
+                            continue;
+                        }
+                        $tripUseful = new TripUsefulModel();
+                        $tripUseful->trip_detail_id = $last_id;
+                        $tripUseful->title = $request->useful_title[$key];
+                        $tripUseful->description = $request->useful_description[$key];
+                        $tripUseful->ordering = $request->useful_ordering[$key];
+                        $tripUseful->save();
+                        $sn_useful++;
+                    }
+                }
               // Insert into Info
               if(isset($request->info_ordering)){
                 $info_keys = array_keys($request->info_ordering);   
@@ -367,6 +386,7 @@ class TripController extends Controller
         $trip_groups = TripGroupModel::all();
         $schedules = $data->schedules()->orderBy('ordering','asc')->get();
         $itineraries = $data->itineraries()->get();
+        $useful_info = $data->useful_infos()->get();
         $gears = $data->gears()->get();
         $costincludes = $data->costincludes()->get();
         $costexcludes = $data->costexcludes()->get();
@@ -393,7 +413,7 @@ class TripController extends Controller
             'schedules',
             'costincludes',
             'costexcludes',
-            'grades'
+            'grades','useful_info'
          ));
     }
 
@@ -743,6 +763,35 @@ class TripController extends Controller
                         $testimonialData->save();
                     }
                     $sn_testimonial++;
+                }
+            }
+
+            // Update Useful Info
+            if (isset($request->useful_ordering)) {
+                $useful_keys = array_keys($request->useful_ordering);
+                $sn_useful = 1;
+                $sn_useful_count = count($request->useful_ordering);
+                foreach ($useful_keys as $key => $value) {
+                    if ($key + 1 >= $sn_useful_count) {
+                        continue;
+                    }
+                    if ($request->useful_id[$value] == "") {
+                        $usefulData = new TripUsefulModel();
+                        $usefulData->trip_detail_id = $data->id;
+                        $usefulData->ordering = $request->useful_ordering[$key];
+                        $usefulData->title = $request->useful_title[$key];
+                        $usefulData->description = $request->useful_description[$key];
+                        $usefulData->save();
+                    } else if ($request->useful_id[$value] !== null && $request->useful_id[$value] !== "") {
+                        $useful_id = $request->useful_id[$value];
+                        $usefulData = TripUsefulModel::find($useful_id);
+                        $usefulData->trip_detail_id = $data->id;
+                        $usefulData->ordering = $request->useful_ordering[$key];
+                        $usefulData->title = $request->useful_title[$key];
+                        $usefulData->description = $request->useful_description[$key];
+                        $usefulData->save();
+                    }
+                    $sn_useful++;
                 }
             }
             // Update cost excludes

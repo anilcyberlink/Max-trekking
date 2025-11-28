@@ -158,6 +158,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('admin/associated/{type}/{id}', 'AdminControllers\Posts\AssociatedPostController@update')->name('admin.associated.update');
 
     Route::delete('admin/schedule/{id}/{info_id}', 'AdminControllers\Travels\TripScheduleController@destroy')->name('schedule.destroy');
+    Route::delete('admin/useful/{id}/{info_id}', 'AdminControllers\Travels\TripUsefulController@destroy')->name('useful.destroy');
     // cost excludes
     Route::delete('admin/trip/{id}/{info_id}', 'AdminControllers\Cost\CostExcludesController@destroy')->name('supporting-info.destroy');
     Route::delete('admin/itinerary/{id?}/{info_id?}', 'AdminControllers\Travels\TripItineraryController@destroy')->name('itinerary.destroy');

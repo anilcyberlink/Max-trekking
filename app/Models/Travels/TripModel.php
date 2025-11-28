@@ -98,6 +98,10 @@ class TripModel extends Model
     {
         return $this->hasMany('App\Models\Travels\TripScheduleModel', 'trip_detail_id')->orderby('ordering', 'asc');
     }
+    public function useful_infos()
+    {
+        return $this->hasMany('App\Models\Travels\TripUsefulModel', 'trip_detail_id')->orderby('ordering', 'asc');
+    }
 
     public function get_trip_grade_data()
     {

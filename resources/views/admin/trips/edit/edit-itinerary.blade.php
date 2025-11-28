@@ -68,8 +68,8 @@
                         <div class="col-md-1"><input type="number" min="1" max="2000" name="itinerary_ordering[]" class="form-control" /></div>
                         <div class="col-md-2"><input type="text" name="itinerary_days[]" class="form-control" placeholder="" /></div>
                         <div class="col-md-3"><input type="text" name="itinerary_title[]" class="form-control" placeholder="" /></div>
-                        <div class="col-md-3"><input type="text" name="itinerary_title[]" class="form-control" placeholder="" /></div>
-                        <div class="col-md-3"><input type="text" name="itinerary_title[]" class="form-control" placeholder="" /></div>
+                        <div class="col-md-3"><input type="text" name="itinerary_meals[]" class="form-control" placeholder="" /></div>
+                        <div class="col-md-3"><input type="text" name="itinerary_accommodation[]" class="form-control" placeholder="" /></div>
                     </div>
                     <div class="col-md-6"><label>Description</label></div>
                     <div class="col-md-11">

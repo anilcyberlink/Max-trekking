@@ -515,36 +515,18 @@
       </div>
       <div class="uk-padding">
          <ul uk-accordion class="uk-best-ul">
-            <li class="uk-faq-li">
-               <a class="uk-accordion-title fw-600 uk-text-uppercase  uk-faq-title" href>Get in peak physical
-                  condition</a>
-               <div class="uk-accordion-content uk-faq-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                     et dolore magna aliqua.</p>
-               </div>
-            </li>
-            <li class="uk-faq-li">
-               <a class="uk-accordion-title fw-600 uk-text-uppercase uk-faq-title" href>Acclimatization is key</a>
-               <div class="uk-accordion-content uk-faq-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                     et dolore magna aliqua.</p>
-               </div>
-            </li>
-            <li class="uk-faq-li">
-               <a class="uk-accordion-title fw-600 uk-text-uppercase  uk-faq-title" href>Gear up for success</a>
-               <div class="uk-accordion-content uk-faq-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                     et dolore magna aliqua.</p>
-               </div>
-            </li>
-            <li class="uk-faq-li">
-               <a class="uk-accordion-title fw-600 uk-text-uppercase  uk-faq-title" href>EATING AND DRINKING</a>
-               <div class="uk-accordion-content uk-faq-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                     et dolore magna aliqua.</p>
-               </div>
-            </li>
-
+            @foreach ($usefulInfo as $row)
+               <li class="uk-faq-li">
+                  <a class="uk-accordion-title fw-600 uk-text-uppercase  uk-faq-title" href>
+                     {{ $row->title }}
+                  </a>
+                  <div class="uk-accordion-content uk-faq-content">
+                     <p>
+                        {!! $row->description !!}
+                     </p>
+                  </div>
+               </li>
+            @endforeach
          </ul>
       </div>
    </div>

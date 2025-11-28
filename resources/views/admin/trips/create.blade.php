@@ -28,12 +28,13 @@
                 <div class="card-header d-flex p-0">
                     <!-- <h3 class="card-title p-3">Manage Trips</h3> -->
                     <ul class="nav nav-pills ml-auto p4 mb10 mt10 nav-custom">
-                    <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab">GENERAL</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">ITINERARY</a></li> 
+                    <li class="nav-item active"><a class="nav-link active" href="#tab_1" data-toggle="tab"> GENERAL</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab"> ITINERARY</a></li> 
                     <li class="nav-item"><a class="nav-link" href="#tab_3" data-toggle="tab"> COST INCLUDES</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_4" data-toggle="tab"> COST EXCLUDES</a></li> 
                     <li class="nav-item"><a class="nav-link" href="#tab_5" data-toggle="tab"> PHOTOS </a></li>
                     <li class="nav-item"><a class="nav-link" href="#tab_6" data-toggle="tab"> DATES </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tab_7" data-toggle="tab"> INFO </a></li> 
                        
                     </ul>
                 </div><!-- /.card-header -->
@@ -56,6 +57,9 @@
                         </div>       
                         <div class="tab-pane" id="tab_6">
                            @include('admin.trips.create.create-trip-schedule') 
+                        </div>                 
+                        <div class="tab-pane" id="tab_7">
+                           @include('admin.trips.create.create-info') 
                         </div>                 
                     </div>
                     <!-- /.tab-content -->
@@ -103,6 +107,33 @@
             }
         });
         /******** End For Itinerary *******/
+        /******** For Useful Info *******/
+        jQuery(document).delegate('a.add-useful', 'click', function(e) {
+            e.preventDefault();
+            jQuery('#useful-headingg').hide();
+            var content = jQuery('#row_useful_additional .row'),
+                size = jQuery('#row_useful_body >.row').length + 1,
+                element = null,
+                element = content.clone();
+            element.attr('id', 'useful-rec-' + size);
+            element.find('.delete-useful').attr('useful-data-id', size);
+            element.appendTo('#row_useful_body');
+            element.find('.sn').html(size);
+        });
+
+        jQuery(document).delegate('button.delete-useful', 'click', function(e) {
+            e.preventDefault();
+            var makeConfirm = confirm("Are you sure you want to delete");
+            if (makeConfirm == true) {
+                var id = jQuery(this).attr('useful-data-id');
+                var targetDiv = jQuery(this).attr('targetDiv');
+                jQuery('#useful-rec-' + id).remove();
+                return true;
+            } else {
+                return false;
+            }
+        });
+        /******** End For Useful Info *******/
        /******** For Schedule *******/
         jQuery(document).delegate('a.add-schedule', 'click', function(e) {
             e.preventDefault();

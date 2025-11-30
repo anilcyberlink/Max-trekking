@@ -89,16 +89,6 @@
                                 value="{{ old('meal') }}" />
                         </div>
                     </div>
-                    {{-- <div class="col-lg-6">
-                        <div class="bs-component">
-                        <label>Country</label>
-                            <!--<input type="text" name="peak_name" class="form-control" value="{{ old('peak_name') }}" />-->
-                             <!--<input class="category-search form-control" type="text" placeholder="Search.."> -->
-                              <select name="peak_name" id="country" class="form-control">
-                               @include('themes.default.common.country')
-                            </select>
-                        </div>
-                    </div> --}}
                 </div>
 
                 <div class="form-group">
@@ -122,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <div class="col-lg-6">
                         <div class="bs-component">
                             <label>Activity</label>
@@ -133,6 +123,20 @@
                         <div class="bs-component">
                             <label>Duration</label>
                             <input type="number" min="1" name="duration" class="form-control" value="{{ old('duration') }}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Start Location</label>
+                            <input type="text" name="start_location" class="form-control" value="{{ old('start_location') }}" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>End Location</label>
+                            <input type="text" name="end_location" class="form-control" value="{{ old('end_location') }}" />
                         </div>
                     </div>
                 </div>
@@ -260,7 +264,13 @@
         </div>
         <div class="admin-form">
             <!-- // -->
-             <div class="sid_bvijay mb10">
+            <div class="sid_bvijay mb10">
+                <h4> Country /Destination </h4>
+                <div class="hd_show_con">
+                    <input type="text" name="peak_name" class="form-control" value="{{ old('peak_name') }}" />
+                </div>
+            </div>
+            <div class="sid_bvijay mb10">
                 <h4> Trip Type </h4>
                 <div class="hd_show_con">
                     <select class="form-control onchange-select" name="trip_type">

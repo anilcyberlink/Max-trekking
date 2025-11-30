@@ -98,7 +98,7 @@
                         <div>
                            <div>
                               <p class="uk-margin-remove"><b>Destination</b></p>
-                              <p class="text-secondary uk-margin-remove">{{ $data->duration }}</p>
+                              <p class="text-secondary uk-margin-remove">{{ $data->peak_name }}</p>
                            </div>
                         </div>
                      </div>
@@ -149,7 +149,7 @@
                         <div>
                            <div>
                               <p class="uk-margin-remove"><b>Starts at</b></p>
-                              <p class="text-secondary uk-margin-remove">{{ $data->duration }}</p>
+                              <p class="text-secondary uk-margin-remove">{{ $data->start_location }}</p>
                            </div>
                         </div>
                      </div>
@@ -162,7 +162,7 @@
                         <div>
                            <div>
                               <p class="uk-margin-remove"><b>Ends at</b></p>
-                              <p class="text-secondary uk-margin-remove">{{ $data->duration }}</p>
+                              <p class="text-secondary uk-margin-remove">{{ $data->end_location }}</p>
                            </div>
                         </div>
                      </div>

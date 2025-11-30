@@ -98,16 +98,6 @@
                                 value="{{ $data->meal }}" />
                         </div>
                     </div>
-                    {{--   <div class="col-lg-6">
-                        <div class="bs-component">
-                            <label>Country</label>
-                            <!--<input type="text" name="peak_name" class="form-control" value="{{ $data->peak_name }}"-->
-                            <!--    placeholder="Staff" />-->
-                                  <select name="peak_name" id="country" class="form-control">
-                               @include('themes.default.common.country')
-                            </select>
-                        </div>
-                    </div> --}}
 
                 </div>
 
@@ -146,6 +136,22 @@
                             <label>Duration</label>
                             <input type="number" min="1" name="duration" class="form-control"
                                 value="{{ $data->duration }}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>Start Location </label>
+                            <input type="text" name="start_location" class="form-control"
+                                value="{{ $data->start_location }}" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="bs-component">
+                            <label>End Location</label>
+                            <input type="text" name="end_location" class="form-control"
+                                value="{{ $data->end_location }}" />
                         </div>
                     </div>
                 </div>
@@ -303,6 +309,14 @@
             </div>
         </div>
         <div class="admin-form">
+            <div class="sid_bvijay mb10">
+                <h4> Country/ Destination</h4>
+                <div class="hd_show_con">
+                    <div class="sid_bvijay mb10">
+                        <input type="text" name="peak_name" class="form-control" value="{{ $data->peak_name }}">
+                    </div>
+                </div>
+            </div>
             <div class="sid_bvijay mb10">
                 <h4> Trip Type </h4>
                 <div class="hd_show_con">

@@ -566,6 +566,8 @@ class TripController extends Controller
             $data->trip_title = $request->trip_title;
             $data->sub_title = $request->sub_title;
             $data->duration = $request->duration;
+            $data->start_location = $request->start_location;
+            $data->end_location = $request->end_location;
             $data->max_altitude = $request->max_altitude;
             $data->best_season = $request->best_season;
             $data->walking_per_day = $request->walking_per_day;

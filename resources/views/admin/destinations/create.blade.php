@@ -25,18 +25,26 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label"> Caption</label>
+                        <label for="inputStandard" class="col-lg-2 control-label"> Sub Title</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
-                                <textarea type="text" id="content" name="content" class="form-control"> </textarea>
+                                <input type="text" id="sub_title" name="sub_title" class="form-control"/>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label"> Banner</label>
+                        <label for="inputStandard" class="col-lg-2 control-label"> Caption</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
-                                <input type="file" name="banner" />
+                                <input type="text" id="excerpt" name="excerpt" class="form-control"/> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStandard" class="col-lg-2 control-label"> Description</label>
+                        <div class="col-lg-9">
+                            <div class="bs-component">
+                                <textarea type="text" id="content" name="content" class="form-control my-editor"> </textarea>
                             </div>
                         </div>
                     </div>
@@ -70,7 +78,7 @@
                     </label>
                 </div>
 
-                <div class="sid_bvijay mb10">
+                <!-- <div class="sid_bvijay mb10">
                     <h4> Thumbnail </h4>
                     <div class="hd_show_con">
                         <div id="xedit-demo">
@@ -78,6 +86,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="sid_bvijay mb10">
+                    <h4> Banner </h4>
+                    <div class="hd_show_con">
+                        <div id="xedit-demo">
+                            <input type="file" name="banner" />
+                        </div>
+                    </div>
+                </div> -->
 
             </div>
         </div>

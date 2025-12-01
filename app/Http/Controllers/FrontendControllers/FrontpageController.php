@@ -208,7 +208,8 @@ class FrontpageController extends Controller
     {
         $data = RegionModel::where('uri', $uri)->first();
         $template = $data->template;
-        $trips = RegionModel::find($data->id)->trips()->paginate(6); 
+        $trips = RegionModel::find($data->id)->trips()->paginate(8); 
+        // dd($data,$trips);
         return view('themes.default.trekking-regionlist', compact('data', 'trips'));
     }
 
@@ -216,7 +217,8 @@ class FrontpageController extends Controller
     {   
         $data = DestinationModel::where('uri', $uri)->first();
         $expeditions = DestinationModel::where('id', '<>', $data->id)->get();
-        $trips = DestinationModel::find($data->id)->trips()->paginate(9);
+        $trips = DestinationModel::find($data->id)->trips()->paginate(8);
+        // dd($data,$expeditions,$trips);
         return view('themes.default.expeditions-trip', compact('data', 'trips', 'expeditions'));
     }
 

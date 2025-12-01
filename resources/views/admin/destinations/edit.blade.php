@@ -28,27 +28,30 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="inputStandard" class="col-lg-2 control-label"> Sub Title</label>
+                        <div class="col-lg-8">
+                            <div class="bs-component">
+                                <input type="text" id="sub_title" name="sub_title" class="form-control" value="{{ $data->sub_title }}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="inputStandard" class="col-lg-2 control-label"> Caption</label>
                         <div class="col-lg-8">
                             <div class="bs-component">
-                                <textarea type="text" id="content" name="content" class="form-control">{{ $data->content }}</textarea>
+                                <input type="text" id="excerpt" name="excerpt" class="form-control" value="{{ $data->excerpt }}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStandard" class="col-lg-2 control-label"> Description</label>
+                        <div class="col-lg-8">
+                            <div class="bs-component">
+                                <textarea type="text" id="content" name="content" class="form-control my-editor">{{ $data->content }}</textarea>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputStandard" class="col-lg-2 control-label"> Banner</label>
-                        <div class="col-lg-9">
-                            <div class="bs-component">
-                                <input type="file" name="banner" />
-                                @if ($data->banner)
-                                    <span class="bannerid{{ $data->id }}">
-                                        <a href="#{{ $data->id }}" class="delete_banner">X</a>
-                                        <img src="{{ asset('uploads/original/' . $data->banner) }}" width="100%" />
-                                @endif
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -81,7 +84,7 @@
                     </label>
                 </div>
 
-                <div class="sid_bvijay mb10">
+                <!-- <div class="sid_bvijay mb10">
                     <h4> Thumbnail </h4>
                     <div class="hd_show_con">
                         <div id="xedit" class="bs-component">
@@ -97,6 +100,19 @@
                         @endif
                     </div>
                 </div>
+                <div class="sid_bvijay mb10">
+                    <h4> Banner </h4>
+                    <div class="hd_show_con">
+                        <div id="xedit" class="bs-component">
+                            <input type="file" name="banner" />
+                        </div>
+                        @if ($data->banner)
+                            <span class="bannerid{{ $data->id }}">
+                                <a href="#{{ $data->id }}" class="delete_banner">X</a>
+                                <img src="{{ asset('uploads/original/' . $data->banner) }}" width="100%" />
+                        @endif
+                    </div>
+                </div> -->
 
 
             </div>

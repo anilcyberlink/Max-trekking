@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DestinationModel extends Model
 {
     protected $table = 'cl_trip_destinations';
-    protected $fillable = ['title', 'uri', 'content', 'thumbnail', 'ordering', 'status','banner','video'];
+    protected $fillable = ['title', 'sub_title','excerpt','uri', 'content', 'thumbnail', 'ordering', 'status','banner','video'];
 
     public function trips()
     {

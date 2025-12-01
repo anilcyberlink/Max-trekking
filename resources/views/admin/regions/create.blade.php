@@ -30,23 +30,31 @@
                         </div>
                     </div>
 
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <label for="inputStandard" class="col-lg-2 control-label">Sub Title</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
                                 <input type="text" id="" name="sub_title" class="form-control" placeholder="" />
                             </div>
                         </div>
-                    </div> -->
-
-                    <!-- <div class="form-group">
-                        <label class="col-lg-2 control-label" for="textArea3"> Brief </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStandard" class="col-lg-2 control-label">Caption</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
-                                <textarea class="my-editor form-control" id="" name="excerpt" rows="3"></textarea>
+                                <input type="text" id="" name="excerpt" class="form-control" placeholder="" />
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="textArea3"> Description </label>
+                        <div class="col-lg-9">
+                            <div class="bs-component">
+                                <textarea class="my-editor form-control" id="" name="content" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -98,10 +106,8 @@
 
 
                 <div class="sid_bvijay mb10">
-                    <label class="field text">
-                        <input type="number" id="" name="ordering" class="form-control" placeholder="Ordering"
-                            value="{{ $ordering }}" />
-                    </label>
+                    <label class="field text">Order </label>
+                        <input type="number" id="" name="ordering" class="form-control" placeholder="Ordering"  value="{{ $ordering }}" />
                 </div>
 
                 <!-- <div class="sid_bvijay mb10">
@@ -113,14 +119,14 @@
                     </div>
                 </div> -->
 
-                <div class="sid_bvijay mb10">
+                <!-- <div class="sid_bvijay mb10">
                     <h4> Banner </h4>
                     <div class="hd_show_con">
                         <div id="xedit-demo">
                             <input type="file" name="banner" />
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 

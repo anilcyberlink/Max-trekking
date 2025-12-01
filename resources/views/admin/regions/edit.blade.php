@@ -23,14 +23,13 @@
                         <label for="inputStandard" class="col-lg-2 control-label">Title</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
-                                <input type="text" id="title" name="title" class="form-control" value="{{ $data->title }}"
-                                    placeholder="Title" />
+                                <input type="text" id="title" name="title" class="form-control" value="{{ $data->title }}" placeholder="Title" />
                                 <input type="hidden" id="uri" name="uri" value="{{ $data->uri }}" />
                             </div>
                         </div>
                     </div>
 
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label for="inputStandard" class="col-lg-2 control-label">Sub Title</label>
                         <div class="col-lg-9">
                             <div class="bs-component">
@@ -38,17 +37,26 @@
                                     value="{{ $data->sub_title }}" placeholder="Sub Title" />
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
-                    {{-- <div class="form-group">
-                        <label class="col-lg-2 control-label" for="textArea3"> Brief </label>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="textArea3"> Caption </label>
                         <div class="col-lg-9">
                             <div class="bs-component">
-                                <textarea class="my-editor form-control" id="" name="excerpt"
-                                    rows="3">{{ $data->excerpt }}</textarea>
+                                <input class="form-control" id="" name="excerpt"
+                                    rows="3" value="{{ $data->excerpt }}"/>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label" for="textArea3"> Description </label>
+                        <div class="col-lg-9">
+                            <div class="bs-component">
+                                <textarea class="form-control my-editor" id="" name="content"
+                                    rows="3">{{ $data->content }}</textarea>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -103,10 +111,9 @@
               
 
                 <div class="sid_bvijay mb10">
-                    <label class="field text">
+                    <label class="field text">Order</label>
                         <input type="number" id="" name="ordering" class="form-control" placeholder="Ordering"
                             value="{{ $data->ordering }}" />
-                    </label>
                 </div>
 
                 {{-- <div class="sid_bvijay mb10">
@@ -126,7 +133,7 @@
                     </div>
                 </div> --}}
 
-                <div class="sid_bvijay mb10">
+                <!-- <div class="sid_bvijay mb10">
                     <h4> Banner </h4>
                     <div class="hd_show_con">
                         @if ($data->banner)
@@ -141,7 +148,7 @@
                             <input type="file" name="banner" />
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 

@@ -168,6 +168,8 @@ class DestinationController extends Controller
       $data->title = $request->title;
       $data->uri = Str::slug($request->uri);
       $data->content = $request->content;
+      $data->sub_title = $request->sub_title;
+      $data->excerpt = $request->excerpt;
       $data->ordering = $request->ordering;
       $data->video = $request->video;
         $data->save();

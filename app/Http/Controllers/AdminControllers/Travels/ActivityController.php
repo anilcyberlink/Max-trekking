@@ -19,6 +19,7 @@ class ActivityController extends Controller
     public function index()
     {
         $data = ActivityModel::orderBy('id','desc')->get();
+        dd('test');
         return view('admin.activities.index',compact('data'));
     }
 

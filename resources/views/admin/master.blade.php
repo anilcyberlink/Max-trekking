@@ -185,7 +185,7 @@
                     </li> -->
 
                     <li class="">
-                        @if(Request::segment(2) == 'expedition' || Request::segment(2) == 'tour-trip' || Request::segment(2) == 'region' || Request::segment(2) == 'trip-region' || Request::segment(2) == 'activity' || Request::segment(2) == 'trip' || Request::segment(2) == 'tripgroup' || Request::segment(2) == 'banner-trip')
+                        @if(Request::segment(2) == 'expedition' || Request::segment(2) == 'tour-trip' || Request::segment(2) == 'region' || Request::segment(2) == 'tripgrade' || Request::segment(2) == 'trip-region' || Request::segment(2) == 'activity' || Request::segment(2) == 'trip' || Request::segment(2) == 'tripgroup' || Request::segment(2) == 'banner-trip')
                             <a class="accordion-toggle menu-open">
                         @else
                                 <a class="accordion-toggle">

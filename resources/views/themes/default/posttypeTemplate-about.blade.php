@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <img src="{{ Asset('themes-assets/img/tree.png') }}" alt="" class="tree-image">
+        <img src="{{ asset('themes-assets/img/tree.png') }}" alt="" class="tree-image">
     </section>
 @endif
 

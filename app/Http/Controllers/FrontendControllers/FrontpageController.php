@@ -52,30 +52,25 @@ class FrontpageController extends Controller
     
     public function index()
     {
-   
         $banner = TripModel::where(['status'=>'1','is_menu'=>'1'])->orderBy('ordering', 'asc')->limit(6)->get();
-        // $about_me = PostTypeModel::where(['id'=>'1'])->first(); //About ArnoldCoster 
-        $about_me = PostModel::where(['id'=>'2'])->first(); //About who we are
-        $about_data_child  = '';
-        $about_data_child_images = [];
-        if($about_me){
-
-            $about_data_child = PostModel::where(['post_parent'=> $about_me['id'],'status'=>'1','show_in_home' =>'1'])->first();
-            if($about_data_child){
-                $about_data_child_images = PostImageModel::where('post_id',$about_data_child['id'])->get();
-            }
-        }
-
-        $expeditions_type = PostTypeModel::where(['is_menu'=>'1','id'=>3])->first();
-        $trekkings_type = PostTypeModel::where(['is_menu'=>'1','id'=>4])->first();
-        $trekkings_list = TripModel::where('trip_type',1)->orderBy('ordering', 'desc')->get();
-        $max_day = TripModel::max('duration');
-        $popular_trip = TripGroupModel::where('id',1)->orderBy('ordering','asc')->first();
+        $about = PostTypeModel::where('id',1)->first();
+        $blog = PostTypeModel::where('id',8)->first();
+        $contact = PostTypeModel::where('id',2)->first();
+        $blogs= PostModel::where('post_type',$blog->id)->orderBy('post_order','asc')->take(2)->get();
+        $expeditions = TripModel::where('trip_type' , '2')
+            ->whereHas('tripgroups', function ($q) {
+                $q->where('group_id', 1);
+            })->orderBy('ordering','asc')->get();
+        $trekRegion = RegionModel::orderBy('ordering','asc')->get();
+        $trekking = TripModel::where('trip_type' , '1')
+            ->whereHas('tripgroups', function ($q) {
+                $q->where('group_id', 1);
+            })->orderBy('ordering','asc')->take(8)->get();
         
-        $contact_us = PostTypeModel::where(['is_menu'=>'1'])->where(['id'=>'2'])->first();
-		$post_contact_us = PostModel::where(['post_type' => '2', 'post_parent' => 0, 'status' => '1', 'show_in_home' => '1'])->first();
         $trip_review = TripReview::where('status', 1)->orderBy('id', 'desc')->paginate(10);
-        return view('themes.default.frontpage', compact('max_day','popular_trip', 'banner','expeditions_type','trekkings_type','about_me','about_data_child','about_data_child_images','contact_us','post_contact_us','trip_review'));
+
+        // dd($trekking);
+        return view('themes.default.frontpage', compact( 'banner','about','contact','blog','blogs','expeditions','trekRegion','trekking','trip_review'));
     }
 
 
@@ -211,6 +206,15 @@ class FrontpageController extends Controller
         $trips = RegionModel::find($data->id)->trips()->paginate(8); 
         // dd($data,$trips);
         return view('themes.default.trekking-regionlist', compact('data', 'trips'));
+    }
+    public function populartriplist()
+    {
+        $trips = TripModel::where('trip_type' , '1')
+            ->whereHas('tripgroups', function ($q) {
+                $q->where('group_id', 1);
+            })->orderBy('ordering','asc')->paginate(8);
+        // dd($trips);
+        return view('themes.default.trekking-popularlist', compact( 'trips'));
     }
 
     public function destinationlist($uri)

@@ -1,9 +1,4 @@
 @extends('themes.default.common.master')
-@section('title', $data->title)
-@section('meta_keyword', $data->title)
-@section('meta_description', $data->content)
-@section('thumbnail', $data->banner)
-@section('brief', $data->content)
 @section('content')
 
 <!-- banner section start -->
@@ -11,7 +6,7 @@
     <div class=" uk-innerpage-banner uk-flex uk-flex-center uk-flex-middle">
         <div class="uk-text-center uk-margin-top">
             <span class="section-tag uk-text-uppercase uk-margin-small-top"><a href="{{url('/')}}" class="text-white">Home</a> / Trekking</span>
-            <h1 class="uk-text-uppercase text-white fw-600 uk-margin-small-top uk-margin-remove-bottom ls-4">{{ $data->sub_title }}</h1>
+            <h1 class="uk-text-uppercase text-white fw-600 uk-margin-small-top uk-margin-remove-bottom ls-4">Packages</h1>
             <div class="divider">
                 <span class="line"></span>
                 <span class="icon"><i class="fa-solid fa-plane"></i></span>
@@ -21,20 +16,6 @@
     </div>
 </section>
 <!-- banner section end -->
-
-<!-- introduction section start  -->
-<section class="uk-section uk-position-relative">
-    <div class="uk-container uk-container-large">
-        <div class="uk-flex uk-flex-left">
-            <h1 class="text-primary fw-600 hb-bottom">{{ $data->excerpt }}<span class="text-secondary"></span></h1>
-        </div>
-        <p class="uk-margin-remove uk-text-justify">
-            {!! $data->content !!}
-        </p>
-    </div>
-    <img src="{{asset('themes-assets/img/tree.png')}}" alt="" class="tree-image">
-</section>
-<!-- introduction section end  -->
 
 <!-- package section start -->
 <section class="uk-section bg-light-blue">

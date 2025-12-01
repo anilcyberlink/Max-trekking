@@ -119,14 +119,14 @@
                     </div>
                 </div> -->
 
-                <!-- <div class="sid_bvijay mb10">
+                <div class="sid_bvijay mb10">
                     <h4> Banner </h4>
                     <div class="hd_show_con">
                         <div id="xedit-demo">
                             <input type="file" name="banner" />
                         </div>
                     </div>
-                </div> -->
+                </div>
 
             </div>
 

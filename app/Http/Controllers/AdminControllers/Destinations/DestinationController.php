@@ -205,6 +205,7 @@ class DestinationController extends Controller
      public function filter($id)
     {
         $data = DestinationModel::find($id)->trips()->get();
+        // dd($data);
        return view('admin.trips.index', compact('data'));
     }
 

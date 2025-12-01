@@ -10,7 +10,7 @@
 <section>
     <div class=" uk-innerpage-banner uk-flex uk-flex-center uk-flex-middle">
         <div class="uk-text-center uk-margin-top">
-            <span class="section-tag uk-text-uppercase uk-margin-small-top"><a href="{{url('/')}}" class="text-white">Home</a> / {{ $data->title }}</span>
+            <span class="section-tag uk-text-uppercase uk-margin-small-top"><a href="{{url('/')}}" class="text-white">Home</a> / Expedition</span>
             <h1 class="uk-text-uppercase text-white fw-600 uk-margin-small-top uk-margin-remove-bottom ls-4">{{ $data->sub_title }}</h1>
             <div class="divider">
                 <span class="line"></span>

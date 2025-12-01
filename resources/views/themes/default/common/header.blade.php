@@ -50,7 +50,7 @@
                                         <ul class="uk-flex-center uk-travel-tabs" data-uk-tab="{connect:'.uk-switcher'}">
                                             @foreach($expeditions as $row)
                                                 @if(trip_byDestinations($row->id)->count()>0)
-                                                    <li><a href="#">{{ $row->title }}</a></li>
+                                                    <li><a>{{ $row->title }}</a></li>
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -78,11 +78,11 @@
                                                                 @endforeach
                                                             </ul>
                                                             <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                                <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
+                                                                <a class="arrow-prev uk-padding-remove" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
                                                                 <a href="{{ route('page.destinationlist', $row->uri) }}" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
                                                                     <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
                                                                 </a>
-                                                                <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
+                                                                <a class="arrow-next uk-padding-remove" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -93,13 +93,13 @@
                                 </div>
                             </li>
                             <li>
-                                <a href="#">Trekking <span uk-navbar-parent-icon></span></a>
+                                <a>Trekking <span uk-navbar-parent-icon></span></a>
                                 <div class="uk-dropbar uk-dropbar-top" uk-drop="offset: 5; boundary:!.uk-navbar-lenght; stretch: x; flip: false; animation: reveal-top; delay-hide: 100; duration: 700;">
                                     <div class="uk-container ">
                                         <ul class="uk-flex-center uk-travel-tabs" data-uk-tab="{connect:'.uk-switcher'}">
                                             @foreach($regions as $row)
                                                 @if (tripbyregions($row->id)->count() > 0)
-                                                    <li><a href="#">{{$row->title}}</a></li>
+                                                    <li><a>{{ $row->title }}</a></li>
                                                 @endif
                                             @endforeach
                                         </ul>
@@ -127,11 +127,11 @@
                                                                 @endforeach
                                                             </ul>
                                                             <div class="uk-flex uk-flex-middle uk-flex-between uk-margin uk-margin-remove-bottom">
-                                                                <a class="arrow-prev uk-padding-remove" href="#" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
+                                                                <a class="arrow-prev uk-padding-remove" uk-icon="icon:arrow-left; ratio: 1.5" uk-slider-item="previous"></a>
                                                                 <a href="{{ route('page.regionlist', $row->uri) }}" class=" uk-small-btn uk-small-btn-primary" style="padding: 4px 16px !important;"> View All
                                                                     <span class="uk-icon " uk-icon="icon:arrow-right; ratio: 1.5" uk-scrollspy="cls: uk-animation-slide-right; delay: 400; repeat: false;"></span>
                                                                 </a>
-                                                                <a class="arrow-next uk-padding-remove" href="#" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
+                                                                <a class="arrow-next uk-padding-remove" uk-icon="icon:arrow-right; ratio: 1.5" uk-slider-item="next"></a>
                                                             </div>
                                                         </div>
                                                     @endif

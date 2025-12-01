@@ -412,7 +412,7 @@
         </div>  --}}
 
         <div class="sid_bvijay mb10">
-            <h4> Trip Show </h4>
+            <h4> Trip Groups </h4>
             <div class="hd_show_con">
                 <div class="tab-content mb15">
                     <div id="tab1" class="tab-pane active">

@@ -47,6 +47,7 @@ Route::get('booking-success', 'FrontendControllers\FrontpageController@showbooki
 Route::get('page/{uri}.html', 'FrontendControllers\FrontpageController@tripdetail')->name('page.tripdetail');
 Route::get('activity/{uri}.html', 'FrontendControllers\FrontpageController@travellist')->name('page.activitydetail');
 Route::get('region/{uri}.html', 'FrontendControllers\FrontpageController@regionlist')->name('page.regionlist');
+Route::get('packages', 'FrontendControllers\FrontpageController@populartriplist')->name('page.packagelist');
 Route::get('tours/{uri}.html', 'FrontendControllers\FrontpageController@destinationlist')->name('page.destinationlist');
 Route::get('trips/{luxury}.html', 'FrontendControllers\FrontpageController@luxuryTrip')->name('page.luxurytriplist');
 Route::any('search-trip', 'FrontendControllers\FrontpageController@show_search_form')->name('search-trip');

@@ -67,10 +67,10 @@ class FrontpageController extends Controller
                 $q->where('group_id', 1);
             })->orderBy('ordering','asc')->take(8)->get();
         
-        $trip_review = TripReview::where('status', 1)->orderBy('id', 'desc')->paginate(10);
+        $reviews = TripReview::where('status', 1)->orderBy('id', 'desc')->get();
 
-        // dd($trekking);
-        return view('themes.default.frontpage', compact( 'banner','about','contact','blog','blogs','expeditions','trekRegion','trekking','trip_review'));
+        // dd($reviews);
+        return view('themes.default.frontpage', compact( 'banner','about','contact','blog','blogs','expeditions','trekRegion','trekking','reviews'));
     }
 
 
@@ -165,28 +165,65 @@ class FrontpageController extends Controller
         $contact_us_post_info = PostTypeModel::where(['is_menu'=>'1'])->where(['id'=>'2'])->first();
         
         if ($data->id) {
-        $itinerary = $data->itineraries()->orderBy('ordering', 'asc')->get();       
-        $schedules = $data->schedules()->orderBy('ordering', 'asc')->get();
-        $usefulInfo = $data->useful_infos()->orderBy('ordering', 'asc')->get();
-        $cost_includes = CostIncludesModel::where('trip_detail_id',$data->id)->orderBy('ordering', 'asc')->get();
-        $cost_excludes = CostExcludesModel::where('trip_detail_id',$data->id)->orderBy('ordering', 'asc')->get();         
-        $photo_videos = TripGearModel::where('trip_detail_id', $data->id)->orderBy('ordering', 'asc')->get();
-        $photos = TripGearModel::where('trip_detail_id', $data->id)->where('thumbnail','!=','NULL')->orderBy('ordering', 'asc')->get();
-        $videos = TripGearModel::where('trip_detail_id', $data->id)->where('video','!=','NULL')->orderBy('ordering', 'asc')->get();
-        $trip_docs = TripDocModel::where('trip_id', $data->id)->take(6)->get();
-        $guide = TravelGuide::where('trip_id',  $data->id)->where('category','=','guide')->get();
-        $gear_insurance = TravelGuide::where('trip_id',  $data->id)->where('category','=','insurance')->get();
-        $gear_payment = TravelGuide::where('trip_id',  $data->id)->where('category','=','payment')->get();
-        $visiter = $data->visiter + 1;
-        $data->visiter = $visiter;
-        $data->save();
+            $itinerary = $data->itineraries()->orderBy('ordering', 'asc')->get();       
+            $schedules = $data->schedules()->orderBy('ordering', 'asc')->get();
+            $usefulInfo = $data->useful_infos()->orderBy('ordering', 'asc')->get();
+            $cost_includes = CostIncludesModel::where('trip_detail_id',$data->id)->orderBy('ordering', 'asc')->get();
+            $cost_excludes = CostExcludesModel::where('trip_detail_id',$data->id)->orderBy('ordering', 'asc')->get();         
+            $photo_videos = TripGearModel::where('trip_detail_id', $data->id)->orderBy('ordering', 'asc')->get();
+            $photos = TripGearModel::where('trip_detail_id', $data->id)->where('thumbnail','!=','NULL')->orderBy('ordering', 'asc')->get();
+            $videos = TripGearModel::where('trip_detail_id', $data->id)->where('video','!=','NULL')->orderBy('ordering', 'asc')->get();
+            $trip_docs = TripDocModel::where('trip_id', $data->id)->take(6)->get();
+            $guide = TravelGuide::where('trip_id',  $data->id)->where('category','=','guide')->get();
+            $gear_insurance = TravelGuide::where('trip_id',  $data->id)->where('category','=','insurance')->get();
+            $gear_payment = TravelGuide::where('trip_id',  $data->id)->where('category','=','payment')->get();
+            $visiter = $data->visiter + 1;
+            $data->visiter = $visiter;
+            $data->save();
+            $reviews = TripReview::where('status', 1)->where('trip_id',  $data->id)->orderBy('id', 'desc')->get();
         }
         $similar_trips=$data->relatedtrips()->orderBy('ordering', 'asc')->take(4)->get();
-        // dd($data,$photos,$usefulInfo);
+        // dd($data,$reviews);
         return view('themes.default.tripdetail', compact('data','contact_us_post_info','schedules','cost_includes', 'cost_excludes', 'itinerary',
-            'photo_videos', 'similar_trips','photos','videos','trip_docs','gear_insurance','gear_payment','guide','usefulInfo'));
+            'photo_videos', 'similar_trips','photos','videos','reviews','trip_docs','gear_insurance','gear_payment','guide','usefulInfo'));
     }
 
+    public function post_review(Request $request)
+    {
+        // dd($request->all());
+        try{
+            $request->validate([
+                'trip_id' => 'required|integer',
+                'fname' => 'required|string|max:255',
+                'lname' => 'required|string|max:255',
+                'cname' => 'required|string|max:255',
+                'image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:2048',
+                'comments' => 'nullable|string',
+                'rating' => 'nullable'
+            ]);
+            $filename = null;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = time() . '.' . $image->getClientOriginalExtension();
+                $image->storeAs('reviews', $filename, 'public');
+            }
+
+            TripReview::create([
+                'trip_id' => $request->trip_id,
+                'name' => $request->fname,
+                'last_name' => $request->lname,
+                'sub_title' => $request->cname,
+                'rating' => $request->rating,
+                'content' => $request->comments,
+                'image' => $filename,
+            ]);
+            
+            return back()->with('success', 'Saved successfully!');
+        }catch(\Exception $e){
+            return back()->with('error', $e->getMessage());
+        }
+
+    }
     //<------------------------------------------Activity Frontend---------------------------------------------->
 
     public function travellist($uri)

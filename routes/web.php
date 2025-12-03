@@ -57,6 +57,7 @@ Route::post('contact','FrontendControllers\FrontpageController@contact_us')->nam
 Route::get('team/{uri}','FrontendControllers\FrontpageController@teamdetail')->name('team.teamdetail');
 Route::get('page/activities/{uri}', 'FrontendControllers\FrontpageController@activities')->name('page.activities');
 Route::post('page/customize-trip', 'FrontendControllers\FrontpageController@customize_trip')->name('customize-trip');
+Route::post('page/post-review', 'FrontendControllers\FrontpageController@post_review')->name('post-review');
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });

@@ -7,7 +7,8 @@ use App\Models\Travels\TripModel;
 
 class TripReview extends Model
 {
-    protected $fillable=['trip_id','name','sub_title','image','brief','content','status'];
+    protected $table = 'trip_reviews';
+    protected $fillable=['trip_id','name','last_name','sub_title','image','rating','brief','content','status'];
 
     public function trips()
     {

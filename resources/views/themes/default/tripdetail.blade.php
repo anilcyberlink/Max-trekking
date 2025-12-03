@@ -534,8 +534,7 @@
 <!-- useful info section end -->
 
 <!-- review section start -->
-<section class="uk-section uk-position-relative uk-section  uk-background-norepeat 
-      uk-background-cover" uk-parallax="bgx: -200; easing: 2;" data-src="{{asset('themes-assets/img/review.png')}}" uk-img id="review">
+<section class="uk-section uk-position-relative uk-section  uk-background-norepeat uk-background-cover" uk-parallax="bgx: -200; easing: 2;" data-src="{{asset('themes-assets/img/review.png')}}" uk-img id="review">
    <div class="uk-overlay-blue uk-position-cover "></div>
    <div class="uk-container-large uk-container uk-position-relative">
       <div class="uk-grid-collapse" uk-grid>
@@ -550,142 +549,51 @@
                </div>
                <div class="uk-btn-back">
                   <i class="fa-solid fa-circle-arrow-right"></i>
-
                </div>
             </a>
          </div>
       </div>
-      <div class="uk-position-relative uk-visible-toggle uk-margin-top" tabindex="-1" uk-slider>
-
-         <div class="uk-slider-items uk-child-width-1-1 uk-child-width-1-2@m uk-child-width-1-3@l uk-grid ">
-            <div class="mt-65">
-               <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
-                  <div>
-                     <img src="{{asset('themes-assets/img/04.png')}}" alt="" class="uk-client-img" loading="lazy">
-                  </div>
-                  <div class="uk-margin-small-top">
-                     <div class="uk-flex uk-flex-between uk-flex-middle">
+      
+      @if($reviews->count() > 0)
+         <div class="uk-position-relative uk-visible-toggle uk-margin-top" tabindex="-1" uk-slider>
+            <div class="uk-slider-items uk-child-width-1-1 uk-child-width-1-2@m uk-child-width-1-3@l uk-grid ">
+               @foreach($reviews as $review)
+                  <div class="mt-65">
+                     <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
                         <div>
-                           <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                           <small class="f-16">Company Name</small>
+                           <img src="{{ $review->image ? asset('storage/reviews/'.$review->image) : asset('themes-assets/img/04.png')}}" alt="{{$review->name}}" class="uk-client-img" loading="lazy">
                         </div>
-                        <div>
-                           <div class="uk-flex uk-flex-right">
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
+                        <div class="uk-margin-small-top">
+                           <div class="uk-flex uk-flex-between uk-flex-middle">
+                              <div>
+                                 <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">{{$review->name}} {{ $review->last_name }}</h4>
+                                 <small class="f-16">{{$review->sub_title}}</small>
+                              </div>
+                              <div>
+                                 <div class="uk-flex uk-flex-right">
+                                    @for ($i = 1 ; $i <= ($review->rating) ; $i++)
+                                       <i class="fa-solid fa-star text-secondary f-16"></i>
+                                    @endfor
+                                 </div>
+                              </div>
                            </div>
+                           <p class="review-text">
+                              {{ $review->content }}
+                           </p>
+                           <button class="read-more-btn">Read More </button>
                         </div>
                      </div>
-                     <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem
-                        Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                     <button class="read-more-btn">Read More </button>
                   </div>
-               </div>
+               @endforeach
             </div>
-            <div class="mt-65">
-               <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
-                  <div>
-                     <img src="{{asset('themes-assets/img/01.png')}}" alt="" class="uk-client-img" loading="lazy">
-                  </div>
-                  <div class="uk-margin-small-top">
-                     <div class="uk-flex uk-flex-between uk-flex-middle">
-                        <div>
-                           <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                           <small class="f-16">Company Name</small>
-                        </div>
-                        <div>
-                           <div class="uk-flex uk-flex-right">
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                           </div>
-                        </div>
-                     </div>
-                     <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem
-                        Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                     <button class="read-more-btn">Read More </button>
-                  </div>
-               </div>
-            </div>
-            <div class="mt-65">
-               <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
-                  <div>
-                     <img src="{{asset('themes-assets/img/02.png')}}" alt="" class="uk-client-img" loading="lazy">
-                  </div>
-                  <div class="uk-margin-small-top">
-                     <div class="uk-flex uk-flex-between uk-flex-middle">
-                        <div>
-                           <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                           <small class="f-16">Company Name</small>
-                        </div>
-                        <div>
-                           <div class="uk-flex uk-flex-right">
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                           </div>
-                        </div>
-                     </div>
-                     <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem
-                        Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                     <button class="read-more-btn">Read More </button>
-                  </div>
-               </div>
-            </div>
-            <div class="mt-65">
-               <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small bg-white">
-                  <div>
-                     <img src="{{asset('themes-assets/img/03.pn')}}g" alt="" class="uk-client-img" loading="lazy">
-                  </div>
-                  <div class="uk-margin-small-top">
-                     <div class="uk-flex uk-flex-between uk-flex-middle">
-                        <div>
-                           <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                           <small class="f-16">Company Name</small>
-                        </div>
-                        <div>
-                           <div class="uk-flex uk-flex-right">
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                              <i class="fa-solid fa-star text-secondary f-16"></i>
-                           </div>
-                        </div>
-                     </div>
-                     <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem
-                        Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the
-                        printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                     <button class="read-more-btn">Read More </button>
-                  </div>
-               </div>
+            <div class="uk-flex uk-flex-center">
+               <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous
+                  uk-slider-item="previous" style="left: 18px !important;"></a>
+               <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next
+                  uk-slider-item="next"></a>
             </div>
          </div>
-         <div class="uk-flex uk-flex-center">
-            <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous
-               uk-slider-item="previous" style="left: 18px !important;"></a>
-            <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next
-               uk-slider-item="next"></a>
-         </div>
-      </div>
+      @endif
    </div>
 </section>
 <!-- review section end -->
@@ -705,13 +613,13 @@
             <div class="uk-margin-top">
                <div class="uk-travel-card bg-light-grey">
                   <div>
-                     <a href="#" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
+                     <a href="{{ url('page/' . tripurl($trip->uri)) }}" class="uk-media-220 uk-inline-clip uk-transition-toggle border-rounded">
                         <img src="{{ $trip->thumbnail ? asset('uploads/original/'.$trip->thumbnail) : asset('themes-assets/img/about.jpeg')}}" class="border-rounded uk-transition-scale-up uk-transition-opaque" loading="lazy" height="500" width="500" alt="{{ $trip->trip_title }}">
                      </a>
                   </div>
                   <div class="uk-travel-text uk-grid-collapse uk-grid ">
                      <div class="uk-width-2-3">
-                        <a href="#" class="two-line">{{ $trip->trip_title }}</a>
+                        <a href="{{ url('page/' . tripurl($trip->uri)) }}" class="two-line">{{ $trip->trip_title }}</a>
                      </div>
                      <div class="uk-width-1-3  text-primary uk-text-right ">
                         <i class="fa-solid fa-star text-secondary"></i> 4.0
@@ -823,66 +731,66 @@
       <div class="bg-primary uk-padding-small uk-custom-padding">
          <div class="uk-padding-small">
             <h4 class="text-white fw-600 uk-text-uppercase uk-margin-remove ">Give us your review</h4>
-
          </div>
       </div>
-      <div class="uk-padding">
+      <form action="{{ route('post-review') }}" method="POST" enctype="multipart/form-data">
+         @csrf
+         <input type="hidden" name="trip_id" value="{{ $data->id }}">
+         <div class="uk-padding">
+            <fieldset class="uk-fieldset">
+               <!--  -->
+               <div class="uk-child-width-1-2@m uk-text-left uk-grid-small" uk-grid>
+                  <div>
+                     <label for="fname" class="text-primary">First Name <span class="uk-text-danger">*</span></label>
+                     <input class="uk-input bg-text border-rounded" type="text" name="fname" placeholder="First Name *" required>
+                  </div>
+                  <div>
+                     <label for="lname" class="text-primary">Last Name <span class="uk-text-danger">*</span></label>
+                     <input class="uk-input bg-text border-rounded" type="text" name="lname" placeholder="Last Name *" required>
+                  </div>
+                  <div>
+                     <label for="cname" class="text-primary">Company Name</label>
+                     <input class="uk-input bg-text border-rounded" type="text" name="cname" placeholder="Company Name *" required>
+                  </div>
 
-         <fieldset class="uk-fieldset">
-            <!--  -->
-            <div class="uk-child-width-1-2@m uk-text-left uk-grid-small" uk-grid>
-               <div>
-                  <label for="fname" class="text-primary">First Name <span class="uk-text-danger">*</span></label>
-                  <input class="uk-input bg-text border-rounded" type="text" name="fname" placeholder="First Name *"
-                     required>
-               </div>
-               <div>
-                  <label for="lname" class="text-primary">Last Name <span class="uk-text-danger">*</span></label>
-                  <input class="uk-input bg-text border-rounded" type="text" name="lname" placeholder="Last Name *"
-                     required>
-               </div>
-               <div>
-                  <label for="cname" class="text-primary">Company Name</label>
-                  <input class="uk-input bg-text border-rounded" type="text" name="cname" placeholder="Company Name *"
-                     required>
-               </div>
+                  <div>
+                     <label class="uk-form-label uk-text-bold" for="">Rating</label>
+                     <div class="star-rating">
+                        <input type="radio" id="5-stars" name="rating" value="5">
+                        <label for="5-stars" class="star">&#9733;</label>
+                        <input type="radio" id="4-stars" name="rating" value="4">
+                        <label for="4-stars" class="star">&#9733;</label>
+                        <input type="radio" id="3-stars" name="rating" value="3">
+                        <label for="3-stars" class="star">&#9733;</label>
+                        <input type="radio" id="2-stars" name="rating" value="2">
+                        <label for="2-stars" class="star">&#9733;</label>
+                        <input type="radio" id="1-star" name="rating" value="1">
+                        <label for="1-star" class="star">&#9733;</label>
+                     </div>
+                  </div>
+                  <div>
+                     <label class="text-primary">Image</label>
+                     <input class="uk-input bg-text border-rounded" type="file" name="image" accept="image/*">
+                  </div>
 
-               <div>
-                  <label class="uk-form-label uk-text-bold" for="">Rating</label>
-                  <div class="star-rating">
-                     <input type="radio" id="5-stars" name="rating" value="5">
-                     <label for="5-stars" class="star">&#9733;</label>
-                     <input type="radio" id="4-stars" name="rating" value="4">
-                     <label for="4-stars" class="star">&#9733;</label>
-                     <input type="radio" id="3-stars" name="rating" value="3">
-                     <label for="3-stars" class="star">&#9733;</label>
-                     <input type="radio" id="2-stars" name="rating" value="2">
-                     <label for="2-stars" class="star">&#9733;</label>
-                     <input type="radio" id="1-star" name="rating" value="1">
-                     <label for="1-star" class="star">&#9733;</label>
+               </div>
+               <!--  -->
+               <div class="uk-child-width-1-1@s uk-child-width-1-1@m uk-text-left uk-margin-small-top uk-margin-bottom "
+                  uk-grid>
+                  <div>
+                     <label for="comments" class="text-primary">Please tell us more about your trip with us.</label>
+                     <textarea name="comments" class="uk-textarea bg-text border-rounded" rows="4"
+                        placeholder="Write your message here"></textarea>
                   </div>
                </div>
-
-            </div>
-            <!--  -->
-            <div class="uk-child-width-1-1@s uk-child-width-1-1@m uk-text-left uk-margin-small-top uk-margin-bottom "
-               uk-grid>
-               <div>
-                  <label for="comments" class="text-primary">Please tell us more about your trip with us.</label>
-                  <textarea name="comments" class="uk-textarea bg-text border-rounded" rows="4"
-                     placeholder="Write your message here"></textarea>
+               <div class="uk-child-width-1-1@s uk-child-width-1-1@m uk-text-left uk-margin-remove-top  " uk-grid>
+                  <div>
+                     <button type="submit" class="uk-small-btn uk-small-btn-primary" style="border:none;">SUBMIT<span uk-icon="icon: arrow-right"></span></button>
+                  </div>
                </div>
-            </div>
-            <div class="uk-child-width-1-1@s uk-child-width-1-1@m uk-text-left uk-margin-remove-top  " uk-grid>
-               <div>
-                  <button type="submit" class="uk-small-btn uk-small-btn-primary" style="border:none;">SUBMIT<span
-                        uk-icon="icon: arrow-right"></span></button>
-               </div>
-            </div>
-
-         </fieldset>
-      </div>
-
+            </fieldset>
+         </div>
+      </form>
    </div>
 </div>
 

@@ -230,132 +230,58 @@
 <!-- package section end -->
 
 <!-- review section start -->
-<section class="uk-section">
-    <div class="uk-container-large uk-container">
-        <div class="uk-grid-collapse" uk-grid uk-scrollspy="cls: uk-animation-fade; target: span,h1,img; delay: 200;">
-            <div class="uk-width-2-3@s">
-                <span class="section-tag">Traveler's Review <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
-                <h1 class="text-primary fw-600 uk-margin-small-top">Know What Our Customers Say</h1>
+@if($reviews->count() > 0)
+    <section class="uk-section">
+        <div class="uk-container-large uk-container">
+            <div class="uk-grid-collapse" uk-grid uk-scrollspy="cls: uk-animation-fade; target: span,h1,img; delay: 200;">
+                <div class="uk-width-2-3@s">
+                    <span class="section-tag">Traveler's Review <i class="fa-solid fa-plane uk-margin-small-left"></i></span>
+                    <h1 class="text-primary fw-600 uk-margin-small-top">Know What Our Customers Say</h1>
+                </div>
+                <div class="uk-width-1-3@s  uk-flex uk-flex-center uk-flex-right@s uk-flex-middle">
+                    <img src="{{asset('themes-assets/img/trip.png')}}" height="150" alt="" loading="lazy" style="height:85px;">
+                </div>
             </div>
-            <div class="uk-width-1-3@s  uk-flex uk-flex-center uk-flex-right@s uk-flex-middle">
-                <img src="assets/img/trip.png" height="150" alt="" loading="lazy" style="height:85px;">
-            </div>
-        </div>
-        <div class="uk-position-relative uk-visible-toggle uk-margin-top" tabindex="-1" uk-slider>
+            <div class="uk-position-relative uk-visible-toggle uk-margin-top" tabindex="-1" uk-slider>
 
-            <div class="uk-slider-items uk-child-width-1-1 uk-child-width-1-2@m uk-child-width-1-3@l uk-grid " uk-scrollspy="cls: uk-animation-fade; target: .mt-65; delay: 200;">
-                <div class="mt-65">
-                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
-                        <div>
-                            <img src="assets/img/04.png" alt="" class="uk-client-img" loading="lazy">
-                        </div>
-                        <div class="uk-margin-small-top">
-                            <div class="uk-flex uk-flex-between uk-flex-middle">
+                <div class="uk-slider-items uk-child-width-1-1 uk-child-width-1-2@m uk-child-width-1-3@l uk-grid " uk-scrollspy="cls: uk-animation-fade; target: .mt-65; delay: 200;">
+                    @foreach($reviews as $review)
+                        <div class="mt-65">
+                            <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
                                 <div>
-                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                                    <small class="f-16">Company Name</small>
+                                    <img src="{{$review->image ? asset('storage/reviews/'.$review->image) : asset('themes-assets/img/04.png')}}" alt="{{$review->name}}" class="uk-client-img" loading="lazy" >
                                 </div>
-                                <div>
-                                    <div class="uk-flex uk-flex-right">
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
+                                <div class="uk-margin-small-top">
+                                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                                        <div>
+                                            <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">{{ $review->name }} {{ $review->last_name }}</h4>
+                                            <small class="f-16">{{$review->sub_title}}</small>
+                                        </div>
+                                        <div>
+                                            <div class="uk-flex uk-flex-right">
+                                                @for ($i=1 ; $i<= ($review->rating) ; $i++)
+                                                    <i class="fa-solid fa-star text-secondary f-16"></i>
+                                                @endfor
+                                            </div>
+                                        </div>
                                     </div>
+                                    <p class="review-text">
+                                        {{ $review->content }}
+                                    </p>
+                                    <button class="read-more-btn">Read More </button>
                                 </div>
                             </div>
-                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                            <button class="read-more-btn">Read More </button>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-                <div class="mt-65">
-                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
-                        <div>
-                            <img src="assets/img/01.png" alt="" class="uk-client-img" loading="lazy">
-                        </div>
-                        <div class="uk-margin-small-top">
-                            <div class="uk-flex uk-flex-between uk-flex-middle">
-                                <div>
-                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                                    <small class="f-16">Company Name</small>
-                                </div>
-                                <div>
-                                    <div class="uk-flex uk-flex-right">
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                            <button class="read-more-btn">Read More </button>
-                        </div>
-                    </div>
+                <div class="uk-flex uk-flex-center">
+                    <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous uk-slider-item="previous" style="left: 18px !important;"></a>
+                    <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next uk-slider-item="next"></a>
                 </div>
-                <div class="mt-65">
-                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
-                        <div>
-                            <img src="assets/img/02.png" alt="" class="uk-client-img" loading="lazy">
-                        </div>
-                        <div class="uk-margin-small-top">
-                            <div class="uk-flex uk-flex-between uk-flex-middle">
-                                <div>
-                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                                    <small class="f-16">Company Name</small>
-                                </div>
-                                <div>
-                                    <div class="uk-flex uk-flex-right">
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                            <button class="read-more-btn">Read More </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-65">
-                    <div class="uk-client-review uk-box-shadow-small border-rounded uk-padding-small">
-                        <div>
-                            <img src="assets/img/03.png" alt="" class="uk-client-img" loading="lazy">
-                        </div>
-                        <div class="uk-margin-small-top">
-                            <div class="uk-flex uk-flex-between uk-flex-middle">
-                                <div>
-                                    <h4 class="f-20 uk-text-bold uk-margin-remove text-primary">Customer Name</h4>
-                                    <small class="f-16">Company Name</small>
-                                </div>
-                                <div>
-                                    <div class="uk-flex uk-flex-right">
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                        <i class="fa-solid fa-star text-secondary f-16"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="review-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum has been the industry's standard dummy text.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.</p>
-                            <button class="read-more-btn">Read More </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="uk-flex uk-flex-center">
-                <a class="uk-position-bottom-right uk-position-small arrow-prev" href uk-slidenav-previous uk-slider-item="previous" style="left: 18px !important;"></a>
-                <a class="uk-position-bottom-right uk-position-small arrow-next " href uk-slidenav-next uk-slider-item="next"></a>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 <!-- review section end -->
 
 <!-- blog section start -->

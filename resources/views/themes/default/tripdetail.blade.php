@@ -266,7 +266,7 @@
                      <a href="#enquiry-form" uk-toggle type="button"
                         class="uk-small-btn uk-small-btn-secondary uk-flex uk-flex-between uk-flex-middle">Enquiry Now<i
                            class="fa fa-long-arrow-right"></i></a>
-                     <a href="book.php"
+                     <a href="{{ route('page.booking', $data->uri) }}"
                         class="uk-small-btn uk-small-btn-white uk-flex uk-flex-between uk-flex-middle uk-margin-top">Book
                         this Trip <i class="fa fa-long-arrow-right"></i></a>
 
@@ -419,7 +419,7 @@
                         </td>
                         <td class="uk-text-right@m" style="padding-bottom:18px;">
                            <a class="uk-small-btn uk-small-btn-primary" href="#enquiry-form" uk-toggle>Inquire Now</a>
-                           <a class="uk-small-btn uk-small-btn-secondary" href="book.php">Book Now</a>
+                           <a class="uk-small-btn uk-small-btn-secondary" href="{{ route('page.fixed.booking', $data->uri) }}">Book Now</a>
                         </td>
                      </tr>
                   @endforeach

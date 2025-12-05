@@ -22,6 +22,7 @@ use App\Models\Pages\PageModel;
 use App\Models\Posts\PostModel;
 use App\Models\Pages\PageDetails;
 use App\Models\Travels\TripModel;
+use App\Models\Settings\SettingModel;
 use App\Models\Pages\PageTypeModel;
 use App\Models\Posts\PostTypeModel;
 use App\Models\Posts\PostImageModel;
@@ -66,10 +67,11 @@ class FrontpageController extends Controller
             ->whereHas('tripgroups', function ($q) {
                 $q->where('group_id', 1);
             })->orderBy('ordering','asc')->take(8)->get();
-        
         $reviews = TripReview::where('status', 1)->orderBy('id', 'desc')->get();
 
-        // dd($reviews);
+        $setting = SettingModel::first();
+
+        // dd($setting);
         return view('themes.default.frontpage', compact( 'banner','about','contact','blog','blogs','expeditions','trekRegion','trekking','reviews'));
     }
 
@@ -279,43 +281,68 @@ class FrontpageController extends Controller
     //  <! ---Booking a Trip Controller--- !>
     public function post_tripbooking(Request $request)
     {   
-        if ($request->isMethod('post')) {
-            // dd($request->all());
+        $g_recaptcha_response = $request->input('g-captcha-response');
+        $result = $this->getCaptcha($g_recaptcha_response);
+
+        if (!$result->success) {
+            return back()->with('error', 'You are a robot');
+        }
+
+        if ($request->isMethod('post')) 
+        {
+            // dd($request->all(),'test 22');
             $request->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'email' => 'required',
-                'country' => 'required',
-                // 'h-captcha-response' => 'required|HCaptcha',
-                'g-captcha-response' => 'required',
-                'terms_conditions' => 'accepted',
+                'trip_id'           => 'required|integer|exists:cl_trip_details,id',
+                'start_date'        => 'required|date',
+                'end_date'          => 'required|date',
+                'num_people'        => 'required|string',
+                'first_name'        => 'required|string|max:255',
+                'last_name'         => 'required|string|max:255',
+                'dob'               => 'required|date',
+                'country'           => 'required|string|max:255',
+                'email'             => 'required|email|max:255',
+                'phone'             => 'required|string|max:25',
+                'comments'          => 'nullable|string|max:2000',
+                'terms_conditions'  => 'accepted',
             ]);
-            if($request->terms_conditions){
-                $request['terms_conditions'] = 1;
-            }
-            $form = \Illuminate\Support\Facades\Request::input();
-            $form['full_name'] = $form['first_name'] . " " . $form['last_name'];
-            if($request->terms_conditions){
-                // dd($request->all());
-                $create = BookingModel::create($form);
+
+            try {
+                $create = BookingModel::create([
+                    'trip_id'          => $request->trip_id,
+                    'schedule_id'      => $request->schedule_id ?? null,
+                    'title'            => $request->title ?? null,
+                    'full_name'        => $request->first_name . ' ' . $request->last_name,
+                    'country'          => $request->country,
+                    'email'            => $request->email,
+                    'phone'            => $request->phone,
+                    'departure_date'   => $request->departure_date ?? null,
+                    'start_date'       => $request->start_date,
+                    'end_date'         => $request->end_date,
+                    'comments'         => $request->comments,
+                    'terms_conditions' => $request->terms_conditions,
+                    'status'           => $request->status,
+                    'num_people'       => $request->num_people,
+                ]);
+            dd($request->all(),'test 22');
+
                 if ($create) {
-                    Mail::send(new \App\Mail\AdminBookingMail($request->email));
+                    // Mail::send(new \App\Mail\AdminBookingMail($request->email));
                     // return redirect()->route('page.bookingsuccess')->with('success', 'Booking completed successfully');
                     $response = [
                         'success' => true,
                         'message' => 'Booking completed successfully.'
                     ];
                     return redirect()->route('page.bookingsuccess')->with('response', $response);
+                } else {
+                    return back()->with('error', 'Failed to save booking. Please try again.');
                 }
-            }else{
-                // return back()->with('message', 'Please agree to the terms and conditions.');
-                $response = [
-                    'info' => true,
-                    'message' => 'Please agree to the terms and conditions.'
-                ];
-                return back()->withInput()->with('response', $response);
+
+            } catch (\Exception $e) {
+                // Log the error for debugging
+                \Log::error('Booking save error: ' . $e->getMessage());
+
+                return back()->with('error', 'An error occurred while saving your booking: ' . $e->getMessage());
             }
-            
         }
     }
 
@@ -510,9 +537,10 @@ class FrontpageController extends Controller
     }
 
     public function showbooking($uri){       
-        $booking = TripModel::where('uri',$uri)->first(); 
+        $trip = TripModel::where('uri',$uri)->first(); 
         $terms = PageTypeModel::where('id','1')->first();
-        return view('themes.default.booking',compact('booking','terms'));
+        // dd($booking);
+        return view('themes.default.booking',compact('trip','terms'));
     }
     public function fixed_booking(Request $request, $uri)
     {
@@ -599,6 +627,13 @@ class FrontpageController extends Controller
         $popular_trip = TripGroupModel::where('id',1)->orderBy('ordering','asc')->first();
         $popular_trips = $popular_trip->trips()->paginate(9);
         return view('themes.default.common.triplist-popular', compact('popular_trips'));
+    }
+    private function getCaptcha($secretKey)
+    {
+        $secret_key = env('SECRET_KEY');
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=" . $secret_key . "&response={$secretKey}");
+        $result = json_decode($response);
+        return $result;
     }
     
     // public function redirect_arnold(){
